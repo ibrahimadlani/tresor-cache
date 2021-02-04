@@ -16,6 +16,13 @@ public class Salle extends Case{
         this.portes = portes;
     }
 
+    public Salle() {
+    }
+
+    public void setTresor(boolean tresor) {
+        this.tresor = tresor;
+    }
+
     public boolean isTresor() { return tresor; }
     public ArrayList<Fantome> getListeFantomes() { return listeFantomes; }
     public ArrayList<Case> getPortes() { return portes; }

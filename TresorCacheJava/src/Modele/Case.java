@@ -30,10 +30,6 @@ public class Case {
         return joueurs;
     }
 
-    public void addJoueurs(Joueur joueur) {
-        this.joueurs.add(joueur);
-    }
-
     public String getNom() {
         return this.nomSalle;
     }

@@ -23,6 +23,10 @@ public class Paquet {
         paquet.add(new Carte("Melange",null));
     }
 
+    public Paquet(ArrayList<Carte> paquet){
+        this.paquet = paquet;
+    }
+
     public Paquet(){
         ArrayList<Carte> paquet = new ArrayList<Carte>();
     }
@@ -30,7 +34,9 @@ public class Paquet {
     public void melanger(Paquet p){
         this.paquet.addAll(p.paquet);
         Collections.shuffle(paquet);
+        p.vider();
     }
+
     public void vider(){
         this.paquet.removeAll(paquet);
     }
@@ -38,7 +44,14 @@ public class Paquet {
     public Carte piocher(Paquet p){
         this.paquet.remove(paquet.get(paquet.size()-1));
         p.paquet.add(paquet.get(paquet.size()-1));
-        return paquet.get(paquet.size()-1);
+        return this.paquet.get(0);
     }
 
+    public ArrayList<Carte> getPaquet() {
+        return paquet;
+    }
+
+    public void setPaquet(ArrayList<Carte> paquet) {
+        this.paquet = paquet;
+    }
 }

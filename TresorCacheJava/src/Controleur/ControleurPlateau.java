@@ -14,6 +14,8 @@ public class ControleurPlateau {
     private vueSalle vs;
     private String erreur = "";
 
+    //private
+
     public ControleurPlateau() {
         this.p = new Plateau();
         this.vue = new VuePlateau();

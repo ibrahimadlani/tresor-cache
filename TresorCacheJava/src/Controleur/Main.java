@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-
         ControleurPlateau cp = new ControleurPlateau();
 
         Scanner sc = new Scanner(System.in);
@@ -69,9 +67,6 @@ public class Main {
                 }
 
             }
-
-
-
         }
     }
 }
