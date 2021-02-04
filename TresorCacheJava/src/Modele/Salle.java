@@ -14,6 +14,14 @@ public class Salle extends Case{
         super.x = x;
         super.y = y;
         this.portes = portes;
+        this.listeFantomes = new ArrayList<>();
+    }
+
+    public Salle() {
+    }
+
+    public void setTresor(boolean tresor) {
+        this.tresor = tresor;
     }
 
     public boolean isTresor() { return tresor; }
@@ -33,7 +41,19 @@ public class Salle extends Case{
             this.listeFantomes.add(new FantomeVert(this));
         }else if (this.listeFantomes.size() == 2 && !(this.listeFantomes.get(0) instanceof FantomeRouge) && !(this.listeFantomes.get(1) instanceof FantomeRouge)){
             this.listeFantomes.removeAll(listeFantomes);
-            this.listeFantomes.add(new FantomeVert(this));
+            this.listeFantomes.add(new FantomeRouge(this));
+        }else {
+            System.out.println("error");
+        }
+    }
+
+    public void deleteFantome(){
+        if (this.listeFantomes.size() == 0) {
+            System.out.println("error");
+        }else if (this.listeFantomes.size() == 1 && !(this.listeFantomes.get(0) instanceof FantomeRouge)){
+            this.listeFantomes.remove(this.listeFantomes.get(0));
+        }else if (this.listeFantomes.size() == 2 && !(this.listeFantomes.get(0) instanceof FantomeRouge) && !(this.listeFantomes.get(1) instanceof FantomeRouge)){
+            this.listeFantomes.remove(this.listeFantomes.get(0));
         }else {
             System.out.println("error");
         }
