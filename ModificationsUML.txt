@@ -1,0 +1,5 @@
+Pour ce Jalons nous devions justifier chaqun de nos changement
+dans notre UML en expliquant pour nous avons opter pour cette 
+version. Pour notre cas, le diagramme UML originel etait tellement
+imcompatible avec le paterne MVC que nous avons decider de refaire 
+tout le diagrame UML à zéro.
