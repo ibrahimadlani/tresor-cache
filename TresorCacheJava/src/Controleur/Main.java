@@ -1,8 +1,5 @@
 package Controleur;
 
-import Vue.VuePlateau;
-import Vue.vueSalle;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -38,7 +35,7 @@ public class Main {
                             cp.monterJoueur(cp.getP().listeJoueurs().get(j));
                             k++;
                         }catch(Exception e){
-                            System.out.println("Tu veux aller ou là mariole ?");
+                            System.out.println("Erreur");
                         }
                         cp.afficher();
                     }else if (mouv == 2){
@@ -46,7 +43,7 @@ public class Main {
                             cp.descendreJoueur(cp.getP().listeJoueurs().get(j));
                             k++;
                         }catch (Exception e){
-                            System.out.println("Tu veux aller ou là mariole ?");
+                            System.out.println("Erreur");
                         }
                         cp.afficher();
                     }else if(mouv == 4){
@@ -54,7 +51,7 @@ public class Main {
                             cp.gaucheJoueur(cp.getP().listeJoueurs().get(j));
                             k++;
                         }catch(Exception e){
-                            System.out.println("Tu veux aller ou là mariole ?");
+                            System.out.println("Erreur");
                         }
                         cp.afficher();
                     }else if(mouv == 6){
@@ -62,7 +59,7 @@ public class Main {
                             cp.droiteJoueur(cp.getP().listeJoueurs().get(j));
                             k++;
                         }catch(Exception e){
-                            System.out.println("Tu veux aller ou là mariole ?");
+                            System.out.println("Erreur");
                         }
                         cp.afficher();
                     }else if(mouv == 0){

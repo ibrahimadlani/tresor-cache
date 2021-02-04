@@ -3,11 +3,11 @@ package Modele;
 import java.util.ArrayList;
 
 public class Case {
+
     protected String nomSalle;
     private ArrayList<Joueur> joueurs;
     protected int x;
     protected int y;
-
 
     public Case(int x, int y){
         this.joueurs = new ArrayList<>();
@@ -16,10 +16,7 @@ public class Case {
         this.y = y;
     }
 
-    public Case(){
-        this.joueurs = new ArrayList<>();
-
-    }
+    public Case(){ this.joueurs = new ArrayList<>(); }
 
     public int getX() {
         return x;
@@ -32,12 +29,9 @@ public class Case {
     public ArrayList<Joueur> getJoueurs() {
         return joueurs;
     }
-    public void setJoueurs(ArrayList<Joueur> joueurs) {
-        this.joueurs = joueurs;
-    }
 
-    public String getNomSalle() {
-        return nomSalle;
+    public void addJoueurs(Joueur joueur) {
+        this.joueurs.add(joueur);
     }
 
     public String getNom() {

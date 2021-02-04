@@ -3,7 +3,7 @@ package Modele;
 import java.util.Random;
 
 public class De {
-    private int chiffre;
+    protected int chiffre;
 
     public De(){
         this.chiffre = 0;
@@ -15,6 +15,5 @@ public class De {
         this.chiffre = x;
         return x;
     }
-
 
 }

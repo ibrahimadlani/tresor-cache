@@ -88,6 +88,22 @@ public class Plateau {
         matrice.get(9).set(6, new Couloir(6,9));
         matrice.get(10).set(6, new Couloir(6,10)); // c'est l'entrée
 
+        ArrayList<Salle> listeSalle = new ArrayList<Salle>();
+        listeSalle.add((Salle) matrice.get(0).get(1));
+        listeSalle.add((Salle) matrice.get(0).get(4));
+        listeSalle.add((Salle) matrice.get(1).get(7));
+        listeSalle.add((Salle) matrice.get(2).get(9));
+        listeSalle.add((Salle) matrice.get(2).get(1));
+        listeSalle.add((Salle) matrice.get(3).get(4));
+        listeSalle.add((Salle) matrice.get(3).get(7));
+        listeSalle.add((Salle) matrice.get(6).get(1));
+        listeSalle.add((Salle) matrice.get(6).get(4));
+        listeSalle.add((Salle) matrice.get(8).get(7));
+        listeSalle.add((Salle) matrice.get(8).get(0));
+        listeSalle.add((Salle) matrice.get(8).get(5));
+
+
+
         this.nbTresor = 0;
         System.out.println("Entrez le nombre de joueurs (2 - 4):");
 
@@ -114,5 +130,9 @@ public class Plateau {
 
     public ArrayList<Joueur> listeJoueurs() {
         return listeJoueurs;
+    }
+
+    public ArrayList<Salle> getListeSalle() {
+        return listeSalle;
     }
 }

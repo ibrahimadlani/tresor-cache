@@ -10,31 +10,27 @@ public class Salle extends Case{
     private ArrayList<Salle> sallesAdjacentes;
 
     public Salle(int x, int y, String nom, ArrayList<Case> portes) {
-        super.nomSalle = nom;
+        this.nom = nom;
         super.x = x;
         super.y = y;
         this.portes = portes;
     }
 
-    public boolean isTresor() {
-        return tresor;
-    }
-
-    public ArrayList<Fantome> getListeFantomes() {
-        return listeFantomes;
-    }
-
-    public ArrayList<Case> getPortes() {
-        return portes;
-    }
-
-    public void evolution(){
-        if (this.listeFantomes.get(0) instanceof FantomeVert && this.listeFantomes.get(1) instanceof FantomeVert &&this.listeFantomes.get(2) instanceof FantomeVert){
+    public boolean isTresor() { return tresor; }
+    public ArrayList<Fantome> getListeFantomes() { return listeFantomes; }
+    public ArrayList<Case> getPortes() { return portes; }
+    public String getNom() { return nom; }
+    public ArrayList<Salle> getSallesAdjacentes() { return sallesAdjacentes; }
+    public void addFantome(){
+        if (this.listeFantomes.size() == 0) {
+            this.listeFantomes.add(new FantomeVert(this));
+        }else if (this.listeFantomes.size() == 1 && !(this.listeFantomes.get(0) instanceof FantomeRouge)){
+            this.listeFantomes.add(new FantomeVert(this));
+        }else if (this.listeFantomes.size() == 2 && !(this.listeFantomes.get(0) instanceof FantomeRouge) && !(this.listeFantomes.get(1) instanceof FantomeRouge)){
             this.listeFantomes.removeAll(listeFantomes);
-            FantomeRouge fr = new FantomeRouge(this);
-            this.listeFantomes.add(fr);
+            this.listeFantomes.add(new FantomeVert(this));
         }else {
-            System.out.println("Evolution impossible");
+            System.out.println("error");
         }
     }
 }

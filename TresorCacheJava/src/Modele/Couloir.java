@@ -1,7 +1,5 @@
 package Modele;
 
-import java.util.ArrayList;
-
 public class Couloir extends Case{
 
     public Couloir(int x, int y) {
