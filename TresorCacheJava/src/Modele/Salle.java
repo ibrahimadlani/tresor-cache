@@ -21,6 +21,11 @@ public class Salle extends Case{
     public ArrayList<Case> getPortes() { return portes; }
     public String getNom() { return nom; }
     public ArrayList<Salle> getSallesAdjacentes() { return sallesAdjacentes; }
+
+    public void setSallesAdjacentes(ArrayList<Salle> sallesAdjacentes) {
+        this.sallesAdjacentes = sallesAdjacentes;
+    }
+
     public void addFantome(){
         if (this.listeFantomes.size() == 0) {
             this.listeFantomes.add(new FantomeVert(this));

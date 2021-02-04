@@ -38,6 +38,7 @@ public class Paquet {
     public Carte piocher(Paquet p){
         this.paquet.remove(paquet.get(paquet.size()-1));
         p.paquet.add(paquet.get(paquet.size()-1));
+        return paquet.get(paquet.size()-1);
     }
 
 }

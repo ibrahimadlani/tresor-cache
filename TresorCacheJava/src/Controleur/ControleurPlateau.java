@@ -60,7 +60,10 @@ public class ControleurPlateau {
             j.setX(j.getX()+1);
             p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
         }else if (p.getMatrice().get(j.getY()).get(j.getX()+1) == null){
-            System.out.println("NO");
+
+                System.out.println("NO");
+
+
         }else if (p.getMatrice().get(j.getY()).get(j.getX()+1) instanceof Salle){
             if((((Salle) p.getMatrice().get(j.getY()).get(j.getX()+1)).getPortes().get(0).getX() == j.getX()) && (((Salle) p.getMatrice().get(j.getY()).get(j.getX()+1)).getPortes().get(0).getY() == j.getY())){
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);

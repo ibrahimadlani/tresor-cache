@@ -103,6 +103,85 @@ public class Plateau {
         listeSalle.add((Salle) matrice.get(8).get(5));
 
 
+        ArrayList<Salle> x = new ArrayList<Salle>();
+        x.clear();
+        x.add(null);
+        x.add(listeSalle.get(1));
+        x.add(null);
+        x.add(null);
+        listeSalle.get(0).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(listeSalle.get(0));
+        x.add(null);
+        x.add(listeSalle.get(0));
+        listeSalle.get(1).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(listeSalle.get(0));
+        x.add(null);
+        x.add(listeSalle.get(0));
+        listeSalle.get(2).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(listeSalle.get(0));
+        x.add(listeSalle.get(0));
+        x.add(null);
+        listeSalle.get(3).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(null);
+        x.add(listeSalle.get(0));
+        x.add(listeSalle.get(0));
+        listeSalle.get(4).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(null);
+        x.add(null);
+        x.add(listeSalle.get(0));
+        listeSalle.get(5).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(null);
+        x.add(listeSalle.get(0));
+        x.add(null);
+        listeSalle.get(6).setSallesAdjacentes(x);
+        x.clear();
+        x.add(listeSalle.get(0));
+        x.add(listeSalle.get(0));
+        x.add(null);
+        x.add(null);
+        listeSalle.get(7).setSallesAdjacentes(x);
+        x.clear();
+        x.add(listeSalle.get(0));
+        x.add(null);
+        x.add(null);
+        x.add(listeSalle.get(0));
+        listeSalle.get(8).setSallesAdjacentes(x);
+        x.clear();
+        x.add(listeSalle.get(0));
+        x.add(null);
+        x.add(null);
+        x.add(null);
+        listeSalle.get(9).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(listeSalle.get(0));
+        x.add(null);
+        x.add(null);
+        listeSalle.get(10).setSallesAdjacentes(x);
+        x.clear();
+        x.add(null);
+        x.add(null);
+        x.add(null);
+        x.add(listeSalle.get(0));
+        listeSalle.get(11).setSallesAdjacentes(x);
+        x.clear();
+
+
+
+
+
 
         this.nbTresor = 0;
         System.out.println("Entrez le nombre de joueurs (2 - 4):");
