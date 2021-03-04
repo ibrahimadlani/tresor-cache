@@ -179,10 +179,6 @@ public class Plateau {
         x.clear();
 
 
-
-
-
-
         this.nbTresor = 0;
         System.out.println("Entrez le nombre de joueurs (2 - 4):");
 
@@ -207,11 +203,25 @@ public class Plateau {
         return matrice;
     }
 
+    public void setNbTresor(int nbTresor) {
+        this.nbTresor = nbTresor;
+    }
+
+    public int getNbTresor() {
+        return nbTresor;
+    }
+
+
+
     public ArrayList<Joueur> listeJoueurs() {
         return listeJoueurs;
     }
 
     public ArrayList<Salle> getListeSalle() {
         return listeSalle;
+    }
+
+    public int getNbFantomeRouge() {
+        return nbFantomeRouge;
     }
 }

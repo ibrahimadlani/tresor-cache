@@ -8,6 +8,7 @@ public class Salle extends Case{
     private String nom;
     private ArrayList<Case> portes;
     private ArrayList<Salle> sallesAdjacentes;
+    private boolean fantomeRouge;
 
     public Salle(int x, int y, String nom, ArrayList<Case> portes) {
         this.nom = nom;
@@ -15,6 +16,8 @@ public class Salle extends Case{
         super.y = y;
         this.portes = portes;
         this.listeFantomes = new ArrayList<>();
+        this.fantomeRouge = false;
+
     }
 
     public Salle() {
@@ -30,6 +33,11 @@ public class Salle extends Case{
     public String getNom() { return nom; }
     public ArrayList<Salle> getSallesAdjacentes() { return sallesAdjacentes; }
 
+    public boolean isFantomeRouge() {
+        return fantomeRouge;
+    }
+
+
     public void setSallesAdjacentes(ArrayList<Salle> sallesAdjacentes) {
         this.sallesAdjacentes = sallesAdjacentes;
     }
@@ -42,6 +50,7 @@ public class Salle extends Case{
         }else if (this.listeFantomes.size() == 2 && !(this.listeFantomes.get(0) instanceof FantomeRouge) && !(this.listeFantomes.get(1) instanceof FantomeRouge)){
             this.listeFantomes.removeAll(listeFantomes);
             this.listeFantomes.add(new FantomeRouge(this));
+            this.fantomeRouge = true;
         }else {
             System.out.println("error");
         }
@@ -58,4 +67,5 @@ public class Salle extends Case{
             System.out.println("error");
         }
     }
+
 }

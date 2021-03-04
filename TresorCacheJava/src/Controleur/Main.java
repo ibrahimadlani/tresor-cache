@@ -8,9 +8,9 @@ public class Main {
         ControleurPlateau cp = new ControleurPlateau();
 
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < 10; i++) {
+        while (cp.getP().getNbTresor() < 6 || cp.getP().getNbFantomeRouge() < 6) {
 
-            System.out.println(" Tour :"+i);
+            System.out.println("-------------------------------------------------------------------------");
             for (int j = 0; j < cp.getP().listeJoueurs().size() ; j++) {
                 System.out.println("/!\\ Tour :"+cp.getP().listeJoueurs().get(j).getNom()+"/!\\ ");
                 System.out.println("\n["+cp.getP().listeJoueurs().get(j).getNom()+"] : Appuyer sur ENTRER pour lancer le dé");
