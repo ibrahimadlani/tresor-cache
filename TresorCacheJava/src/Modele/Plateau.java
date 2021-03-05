@@ -7,7 +7,7 @@ public class Plateau {
 
     private ArrayList<ArrayList<Case>> matrice = new ArrayList<>();
     private ArrayList<Joueur> listeJoueurs;
-    private ArrayList<Salle> listeSalle;
+    private ArrayList<Salle> listeSalle = new ArrayList<Salle>();
     private int nbJoueurs;
     private int nbTresor;
     private int nbFantomeRouge;
@@ -28,8 +28,7 @@ public class Plateau {
             }
             matrice.add(ligne);
         }
-        this.paquet1 = new Paquet(this);
-        this.paquet2 = new Paquet();
+
         this.deCombat1 = new DeCombat();
         this.deCombat2 = new DeCombat();
         this.deMouvement = new DeMouvement();
@@ -101,7 +100,6 @@ public class Plateau {
         matrice.get(9).set(6, new Couloir(6,9));
         matrice.get(10).set(6, new Couloir(6,10)); // c'est l'entrée
 
-        ArrayList<Salle> listeSalle = new ArrayList<Salle>();
         listeSalle.add((Salle) matrice.get(0).get(1));
         listeSalle.add((Salle) matrice.get(0).get(4));
         listeSalle.add((Salle) matrice.get(1).get(7));
@@ -227,6 +225,9 @@ public class Plateau {
             listeJoueurs.add(j);
             matrice.get(10).get(6).ajouterJoueur(j);
         }
+
+        this.paquet1 = new Paquet(this);
+        this.paquet2 = new Paquet();
 
     }
 
