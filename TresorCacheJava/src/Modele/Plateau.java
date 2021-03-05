@@ -11,6 +11,13 @@ public class Plateau {
     private int nbJoueurs;
     private int nbTresor;
     private int nbFantomeRouge;
+    private DeCombat deCombat1;
+    private DeCombat deCombat2;
+    private DeMouvement deMouvement;
+    private Paquet paquet1;
+    private Paquet paquet2;
+
+
 
     public Plateau() {
         Scanner sc1 = new Scanner(System.in);
@@ -21,6 +28,13 @@ public class Plateau {
             }
             matrice.add(ligne);
         }
+        this.paquet1 = new Paquet(this);
+        this.paquet2 = new Paquet();
+        this.deCombat1 = new DeCombat();
+        this.deCombat2 = new DeCombat();
+        this.deMouvement = new DeMouvement();
+
+
 
         ArrayList<Case> portesA = new ArrayList<Case>();
         ArrayList<Case> portesB = new ArrayList<Case>();
@@ -228,7 +242,26 @@ public class Plateau {
         return nbTresor;
     }
 
+    public DeCombat getDeCombat1() {
+        return deCombat1;
+    }
 
+    public DeCombat getDeCombat2() {
+        return deCombat2;
+    }
+
+    public DeMouvement getDeMouvement() {
+        return deMouvement;
+    }
+
+
+    public Paquet getPaquet1() {
+        return paquet1;
+    }
+
+    public Paquet getPaquet2() {
+        return paquet2;
+    }
 
     public ArrayList<Joueur> listeJoueurs() {
         return listeJoueurs;

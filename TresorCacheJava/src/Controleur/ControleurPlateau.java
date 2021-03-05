@@ -6,6 +6,7 @@ import Vue.VuePlateau;
 import Vue.vueSalle;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ControleurPlateau {
     private Plateau p;
@@ -298,6 +299,50 @@ public class ControleurPlateau {
         if (j.isTresor() == true && j.getX() == 6 && j.getY() == 10){ // pas sur des coordoné inverse
             p.setNbTresor(p.getNbTresor()+1);
             j.setTresor(false);
+        }
+    }
+
+    public void combatVert(Joueur j, Salle s){
+        Scanner sc = new Scanner(System.in);
+        String enter = sc.nextLine();
+        while (enter == null) {
+            System.out.println("\n["+j.getNom()+"] : Appuyer sur ENTRER pour combatre le fantome vert");
+            enter = sc.nextLine();
+        }
+        if (!s.isFantomeRouge() && s.getListeFantomes().size() > 0){
+            if (p.getDeCombat1().roll() == 1){
+
+            }else {
+                System.out.println("Defaite Combat");
+            }
+        }
+    }
+
+    public void combatRouge(Joueur j1,Joueur j2, Salle s){
+        Scanner sc = new Scanner(System.in);
+        String enter = sc.nextLine();
+        while (enter == null) {
+            System.out.println("\n["+j1.getNom()+"] : Appuyer sur ENTRER pour combatre le fantome vert");
+            enter = sc.nextLine();
+        }
+        if (s.isFantomeRouge() && s.getListeFantomes().size() > 0){
+            if (p.getDeCombat1().roll() == 2){
+                //SupprimerFantomeRouge
+            }else {
+                Scanner sc2 = new Scanner(System.in);
+                String enter2 = sc.nextLine();
+                while (enter2 == null) {
+                    System.out.println("\n["+j2.getNom()+"] : Appuyer sur ENTRER pour combatre le fantome vert");
+                    enter = sc.nextLine();
+                }
+                if (s.isFantomeRouge() && s.getListeFantomes().size() > 0){
+                    if (p.getDeCombat1().roll() == 2){
+                        //SupprimerFantomeRouge
+                    }else {
+                        System.out.println("Defaite Combat");
+                    }
+
+            }
         }
     }
 
