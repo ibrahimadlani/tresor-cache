@@ -23,35 +23,131 @@ public class ControleurPlateau {
     public Plateau getP() { return p; }
 
     public void monterJoueur(Joueur j){
-        if (p.getMatrice().get(j.getY()-1).get(j.getX()) instanceof Couloir){
-            p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
-            j.setY(j.getY()-1);
-            p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
-        }else if (p.getMatrice().get(j.getY()-1).get(j.getX()) == null){
-            System.out.println("NO");
-        }else if (p.getMatrice().get(j.getY()-1).get(j.getX()) instanceof Salle){
-            if((((Salle) p.getMatrice().get(j.getY()-1).get(j.getX())).getPortes().get(0).getX() == j.getX()) && (((Salle) p.getMatrice().get(j.getY()-1).get(j.getX())).getPortes().get(0).getY() == j.getY())){
+
+        Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
+        Case caseDestination = p.getMatrice().get(j.getY()-1).get(j.getX());
+
+        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
+        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
+
+        // ORIGINE : UNE SALLE
+        if (iscaseOrigineSalle){
+            ArrayList<Case> portesSalle = ((Salle) caseOrigine).getPortes();
+            ArrayList<Salle> sallesAdjacentesSalle = ((Salle) caseOrigine).getSallesAdjacentes();
+            Salle salleOrigine = (Salle) p.getMatrice().get(j.getY()).get(j.getX());
+
+            // DESTINATION : UNE COULOIR
+            if (caseDestination instanceof Couloir){
+                System.out.println("Vers un couloir");
+                if ((salleOrigine.getPortes().get(0).getX() == caseDestination.getX() && salleOrigine.getPortes().get(0).getY() == caseDestination.getY())){
+                    p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                    j.setX((salleOrigine.getPortes().get(0).getX()));
+                    j.setY((salleOrigine.getPortes().get(0).getY()));
+                    p.getMatrice().get(salleOrigine.getPortes().get(0).getY()).get(salleOrigine.getPortes().get(0).getX()).ajouterJoueur(j);
+                }
+            }
+            // DESTINATION : UNE SALLE ADJACENTES
+            else if (salleOrigine.getSallesAdjacentes().get(0) != null){
+                p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                j.setX(salleOrigine.getSallesAdjacentes().get(0).getX());
+                j.setY(salleOrigine.getSallesAdjacentes().get(0).getY());
+                p.getMatrice().get(salleOrigine.getSallesAdjacentes().get(0).getY()).get(salleOrigine.getSallesAdjacentes().get(0).getX()).ajouterJoueur(j);
+            }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
+            }
+        }
+        // ORIGINE : UN COULOIR
+        else{
+            // DESTINATION : UNE SALLE
+            if (caseDestination instanceof Salle){
+                Salle salleDestination =  (Salle) caseDestination;
+                System.out.println("Destination Salle");
+                if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())||(salleDestination.getPortes().get(1).getX() == caseOrigine.getX() && salleDestination.getPortes().get(1).getY() == caseOrigine.getY())){
+                    System.out.println("La destination est bien une porte vers une salle");
+                    p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                    j.setY(j.getY()-1);
+                    p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
+                }else{
+                    System.out.println("La destination n'est pas une porte vers une salle");
+                }
+            }
+            // DESTINATION : UN COULOIR
+            else if (caseDestination instanceof Couloir){
+                System.out.println("La destination est un autre couloir");
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setY(j.getY()-1);
                 p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
-                vs.affichage((Salle) p.getMatrice().get(j.getY()-1).get(j.getX()));
+            }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
             }
         }
+
     }
     public void descendreJoueur(Joueur j){
-        if (p.getMatrice().get(j.getY()+1).get(j.getX()) instanceof Couloir){
-            p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
-            j.setY(j.getY()+1);
-            p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
-        }else if (p.getMatrice().get(j.getY()+1).get(j.getX()) == null){
-            System.out.println("NO");
-        }else if (p.getMatrice().get(j.getY()+1).get(j.getX()) instanceof Salle){
-            if((((Salle) p.getMatrice().get(j.getY()+1).get(j.getX())).getPortes().get(0).getX() == j.getX()) && (((Salle) p.getMatrice().get(j.getY()+1).get(j.getX())).getPortes().get(0).getY() == j.getY())){
+
+        Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
+        Case caseDestination = p.getMatrice().get(j.getY()+1).get(j.getX());
+
+        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
+        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
+
+        // ORIGINE : UNE SALLE
+        if (iscaseOrigineSalle){
+            ArrayList<Case> portesSalle = ((Salle) caseOrigine).getPortes();
+            ArrayList<Salle> sallesAdjacentesSalle = ((Salle) caseOrigine).getSallesAdjacentes();
+            Salle salleOrigine = (Salle) p.getMatrice().get(j.getY()).get(j.getX());
+
+            // DESTINATION : UNE COULOIR
+            if ((salleOrigine.getPortes().get(0).getX() == caseDestination.getX() && salleOrigine.getPortes().get(0).getY() == caseDestination.getY())){
+                p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                j.setX((salleOrigine.getPortes().get(0).getX()));
+                j.setY((salleOrigine.getPortes().get(0).getY()));
+                p.getMatrice().get(salleOrigine.getPortes().get(0).getY()).get(salleOrigine.getPortes().get(0).getX()).ajouterJoueur(j);
+            }
+            // DESTINATION : UNE SALLE ADJACENTES
+            else if (salleOrigine.getSallesAdjacentes().get(2) != null){
+                p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                j.setX(salleOrigine.getSallesAdjacentes().get(2).getX());
+                j.setY(salleOrigine.getSallesAdjacentes().get(2).getY());
+                p.getMatrice().get(j.getY()).get(j.getY()).ajouterJoueur(j);
+            }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
+            }
+        }
+        // ORIGINE : UN COULOIR
+        else{
+            // DESTINATION : UNE SALLE
+            if (caseDestination instanceof Salle){
+                Salle salleDestination =  (Salle) caseDestination;
+                System.out.println("Destination Salle");
+                if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())){
+                    System.out.println("La destination est bien une porte vers une salle");
+                    p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                    j.setY(j.getY()+1);
+                    p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
+                }else{
+                    System.out.println("La destination n'est pas une porte vers une salle");
+                }
+            }
+            // DESTINATION : UN COULOIR
+            else if (caseDestination instanceof Couloir){
+                System.out.println("La destination est un autre couloir");
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setY(j.getY()+1);
                 p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
             }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
+            }
         }
+
 
     }
 
@@ -62,53 +158,129 @@ public class ControleurPlateau {
         boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
         boolean isCaseDestinationSalle = caseDestination instanceof Salle;
 
+        // ORIGINE : UNE SALLE
         if (iscaseOrigineSalle){
             ArrayList<Case> portesSalle = ((Salle) caseOrigine).getPortes();
             ArrayList<Salle> sallesAdjacentesSalle = ((Salle) caseOrigine).getSallesAdjacentes();
-            Salle salleDestination =  (Salle) caseDestination;
-            if (portesSalle.contains(caseDestination)){
-                System.out.println("La destination est bien une porte vers la sortie");
-            }else if (sallesAdjacentesSalle.contains(salleDestination)){
-                System.out.println("La destination est bien une salle adjacente");
-            }else{
-                System.out.println("Erreur : vous n'avez bouger de la salle");
+
+            Salle salleOrigine = (Salle) p.getMatrice().get(j.getY()).get(j.getX());
+            System.out.println("De Salle");
+            // DESTINATION : UNE COULOIR
+            if (caseDestination instanceof Couloir){
+                if ((caseDestination.getX() == salleOrigine.getPortes().get(0).getX() && caseDestination.getY() == salleOrigine.getPortes().get(0).getY())) {
+                    p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                    j.setX((salleOrigine.getPortes().get(0).getX()));
+                    j.setY((salleOrigine.getPortes().get(0).getY()));
+                    p.getMatrice().get(salleOrigine.getPortes().get(0).getY()).get(salleOrigine.getPortes().get(0).getX()).ajouterJoueur(j);
+                }
+
+
             }
-        }else{
-            if (caseDestination == null){
-                System.out.println("Erreur : Destination null");
-            }else if (isCaseDestinationSalle){
-                System.out.println("Erreur : Destination null");
+            // DESTINATION : UNE SALLE ADJACENTES
+
+            else if (salleOrigine.getSallesAdjacentes().get(1) != null){
+                p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                j.setX(salleOrigine.getSallesAdjacentes().get(1).getX());
+                j.setY(salleOrigine.getSallesAdjacentes().get(1).getY());
+                p.getMatrice().get(j.getY()).get(j.getY()).ajouterJoueur(j);
+            }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
+            }
+        }
+        // ORIGINE : UN COULOIR
+        else{
+            System.out.println(caseDestination.getClass());
+            // DESTINATION : UNE SALLE
+            if (caseDestination instanceof Salle){
+                Salle salleDestination =  (Salle) caseDestination;
+                System.out.println("Destination Salle");
+                if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())||(salleDestination.getPortes().get(1).getX() == caseOrigine.getX() && salleDestination.getPortes().get(1).getY() == caseOrigine.getY())){
+                    System.out.println("La destination est bien une porte vers une salle");
+                    p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                    j.setX(j.getX()+1);
+                    p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
+                }else{
+                    System.out.println("La destination n'est pas une porte vers une salle");
+                }
+            }
+            // DESTINATION : UN COULOIR
+            else if (caseDestination instanceof Couloir){
+                System.out.println("La destination est un autre couloir");
+                p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                j.setX(j.getX()+1);
+                p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
+            }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
             }
         }
 
-        //if (p.getMatrice().get(j.getY()).get(j.getX()+1) instanceof Couloir){
-        //    p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
-        //    j.setX(j.getX()+1);
-        //    p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
-        //}else if (p.getMatrice().get(j.getY()).get(j.getX()+1) == null){
-        //        System.out.println("NO");
-        //}else if (p.getMatrice().get(j.getY()).get(j.getX()+1) instanceof Salle){
-        //    if((((Salle) p.getMatrice().get(j.getY()).get(j.getX()+1)).getPortes().get(0).getX() == j.getX()) && (((Salle) p.getMatrice().get(j.getY()).get(j.getX()+1)).getPortes().get(0).getY() == j.getY())){
-        //        p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
-        //        j.setX(j.getX()+1);
-        //        p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
-        //    }
-        //}
     }
     public void gaucheJoueur(Joueur j){
-        if (p.getMatrice().get(j.getY()).get(j.getX()-1) instanceof Couloir){
-            p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
-            j.setX(j.getX()-1);
-            p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
-        }else if (p.getMatrice().get(j.getY()).get(j.getX()-1) == null){
-            System.out.println("NO");
-        }else if (p.getMatrice().get(j.getY()).get(j.getX()-1) instanceof Salle){
-            if(((((Salle) p.getMatrice().get(j.getY()).get(j.getX()-1)).getPortes().get(0).getX() == j.getX()) && (((Salle) p.getMatrice().get(j.getY()).get(j.getX()-1)).getPortes().get(0).getY() == j.getY())) || ((((Salle) p.getMatrice().get(j.getY()).get(j.getX()-1)).getPortes().get(1).getX() == j.getX()) && (((Salle) p.getMatrice().get(j.getY()).get(j.getX()-1)).getPortes().get(1).getY() == j.getY()))){
+
+        Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
+        Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX()-1);
+        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
+        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
+
+        // ORIGINE : UNE SALLE
+        if (iscaseOrigineSalle){
+            ArrayList<Case> portesSalle = ((Salle) caseOrigine).getPortes();
+            ArrayList<Salle> sallesAdjacentesSalle = ((Salle) caseOrigine).getSallesAdjacentes();
+
+            Salle salleOrigine = (Salle) p.getMatrice().get(j.getY()).get(j.getX());
+
+            // DESTINATION : UNE COULOIR
+            if ((salleOrigine.getPortes().get(0).getX() == caseDestination.getX() && salleOrigine.getPortes().get(0).getY() == caseDestination.getY())){
+                p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                j.setX((salleOrigine.getPortes().get(0).getX()));
+                j.setY((salleOrigine.getPortes().get(0).getY()));
+                p.getMatrice().get(salleOrigine.getPortes().get(0).getY()).get(salleOrigine.getPortes().get(0).getX()).ajouterJoueur(j);
+            }
+            // DESTINATION : UNE SALLE ADJACENTES
+            else if (salleOrigine.getSallesAdjacentes().get(3) != null){
+                p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                j.setX(salleOrigine.getSallesAdjacentes().get(3).getX());
+                j.setY(salleOrigine.getSallesAdjacentes().get(3).getY());
+                p.getMatrice().get(j.getY()).get(j.getY()).ajouterJoueur(j);
+            }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
+            }
+        }
+        // ORIGINE : UN COULOIR
+        else{
+            System.out.println(caseDestination.getClass());
+            // DESTINATION : UNE SALLE
+            if (caseDestination instanceof Salle){
+                Salle salleDestination =  (Salle) caseDestination;
+                System.out.println("Destination Salle");
+                if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())||(salleDestination.getPortes().get(1).getX() == caseOrigine.getX() && salleDestination.getPortes().get(1).getY() == caseOrigine.getY())){
+                    System.out.println("La destination est bien une porte vers une salle");
+                    p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
+                    j.setX(j.getX()-1);
+                    p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
+                }else{
+                    System.out.println("La destination n'est pas une porte vers une salle");
+                }
+            }
+            // DESTINATION : UN COULOIR
+            else if (caseDestination instanceof Couloir){
+                System.out.println("La destination est un autre couloir");
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setX(j.getX()-1);
                 p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
             }
+            // DESTINATION : NULL
+            else if (caseDestination == null){ // DESTINATION : null
+                System.out.println("La destination est bien une null");
+            }
         }
+
     }
 
     public void prendreTresor(Joueur j){
@@ -123,7 +295,7 @@ public class ControleurPlateau {
         }
     }
     public void depotTresor(Joueur j){
-        if (j.isTresor() == true && j.getX() == 3 && j.getY() == 2){
+        if (j.isTresor() == true && j.getX() == 6 && j.getY() == 10){ // pas sur des coordoné inverse
             p.setNbTresor(p.getNbTresor()+1);
             j.setTresor(false);
         }

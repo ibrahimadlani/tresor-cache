@@ -42,7 +42,6 @@ public class Plateau {
         portesE.add(matrice.get(1).get(1));
         portesF.add(matrice.get(4).get(6));
         portesF.add(matrice.get(2).get(4));
-
         portesG.add(matrice.get(3).get(6));
         portesH.add(matrice.get(7).get(1));
         portesI.add(matrice.get(7).get(4));
@@ -103,80 +102,98 @@ public class Plateau {
         listeSalle.add((Salle) matrice.get(8).get(5));
 
 
-        ArrayList<Salle> x = new ArrayList<Salle>();
-        x.clear();
-        x.add(null);
-        x.add(listeSalle.get(1));
-        x.add(null);
-        x.add(null);
-        listeSalle.get(0).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(listeSalle.get(0));
-        x.add(null);
-        x.add(listeSalle.get(0));
-        listeSalle.get(1).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(listeSalle.get(0));
-        x.add(null);
-        x.add(listeSalle.get(0));
-        listeSalle.get(2).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(listeSalle.get(0));
-        x.add(listeSalle.get(0));
-        x.add(null);
-        listeSalle.get(3).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(null);
-        x.add(listeSalle.get(0));
-        x.add(listeSalle.get(0));
-        listeSalle.get(4).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(null);
-        x.add(null);
-        x.add(listeSalle.get(0));
-        listeSalle.get(5).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(null);
-        x.add(listeSalle.get(0));
-        x.add(null);
-        listeSalle.get(6).setSallesAdjacentes(x);
-        x.clear();
-        x.add(listeSalle.get(0));
-        x.add(listeSalle.get(0));
-        x.add(null);
-        x.add(null);
-        listeSalle.get(7).setSallesAdjacentes(x);
-        x.clear();
-        x.add(listeSalle.get(0));
-        x.add(null);
-        x.add(null);
-        x.add(listeSalle.get(0));
-        listeSalle.get(8).setSallesAdjacentes(x);
-        x.clear();
-        x.add(listeSalle.get(0));
-        x.add(null);
-        x.add(null);
-        x.add(null);
-        listeSalle.get(9).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(listeSalle.get(0));
-        x.add(null);
-        x.add(null);
-        listeSalle.get(10).setSallesAdjacentes(x);
-        x.clear();
-        x.add(null);
-        x.add(null);
-        x.add(null);
-        x.add(listeSalle.get(0));
-        listeSalle.get(11).setSallesAdjacentes(x);
-        x.clear();
+        ArrayList<Salle> a = new ArrayList<Salle>();
+        a.add(null);
+        a.add(listeSalle.get(1));
+        a.add(null);
+        a.add(null);
+        ((Salle) matrice.get(0).get(1)).setSallesAdjacentes(a);
+
+        ArrayList<Salle> b = new ArrayList<Salle>();
+        b.add(null);
+        b.add(listeSalle.get(0));
+        b.add(null);
+        b.add(listeSalle.get(0));
+        ((Salle) matrice.get(0).get(4)).setSallesAdjacentes(b);
+
+        ArrayList<Salle> c = new ArrayList<Salle>();
+        c.clear();
+        c.add(null);
+        c.add(listeSalle.get(0));
+        c.add(null);
+        c.add(listeSalle.get(0));
+        ((Salle) matrice.get(1).get(7)).setSallesAdjacentes(c);
+
+        ArrayList<Salle> d = new ArrayList<Salle>();
+        d.clear();
+        d.add(null);
+        d.add(listeSalle.get(0));
+        d.add(listeSalle.get(0));
+        d.add(null);
+        ((Salle) matrice.get(2).get(9)).setSallesAdjacentes(d);
+
+        ArrayList<Salle> e = new ArrayList<Salle>();
+        e.clear();
+        e.add(null);
+        e.add(null);
+        e.add(listeSalle.get(0));
+        e.add(listeSalle.get(0));
+        ((Salle) matrice.get(2).get(1)).setSallesAdjacentes(e);
+
+        ArrayList<Salle> f = new ArrayList<Salle>();
+        f.clear();
+        f.add(null);
+        f.add(null);
+        f.add(null);
+        f.add(listeSalle.get(0));
+        ((Salle) matrice.get(3).get(4)).setSallesAdjacentes(f);
+
+        ArrayList<Salle> g = new ArrayList<Salle>();
+        g.clear();
+        g.add(null);
+        g.add(null);
+        g.add(listeSalle.get(0));
+        g.add(null);
+        ((Salle) matrice.get(3).get(7)).setSallesAdjacentes(g);
+
+        ArrayList<Salle> h = new ArrayList<Salle>();
+        h.clear();
+        h.add(listeSalle.get(0));
+        h.add(listeSalle.get(0));
+        h.add(null);
+        h.add(null);
+        ((Salle) matrice.get(6).get(1)).setSallesAdjacentes(h);
+
+        ArrayList<Salle> y = new ArrayList<Salle>();
+
+        y.add(listeSalle.get(0));
+        y.add(null);
+        y.add(null);
+        y.add(listeSalle.get(0));
+        ((Salle) matrice.get(6).get(4)).setSallesAdjacentes(y);
+
+        ArrayList<Salle> z = new ArrayList<Salle>();
+
+        z.add(listeSalle.get(0));
+        z.add(null);
+        z.add(null);
+        z.add(null);
+        ((Salle) matrice.get(8).get(7)).setSallesAdjacentes(z);
+
+        ArrayList<Salle> k = new ArrayList<Salle>();
+        k.add(null);
+        k.add(listeSalle.get(0));
+        k.add(null);
+        k.add(null);
+        ((Salle) matrice.get(8).get(0)).setSallesAdjacentes(k);
+
+        ArrayList<Salle> l = new ArrayList<Salle>();
+        l.add(null);
+        l.add(null);
+        l.add(null);
+        l.add(listeSalle.get(0));
+        ((Salle) matrice.get(8).get(5)).setSallesAdjacentes(l);
+
 
 
         this.nbTresor = 0;
