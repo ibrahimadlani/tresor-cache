@@ -23,6 +23,9 @@ public class Main {
                 int x = r.nextInt(6)+1;
                 System.out.println("\uD83C\uDFB2 : rolling...");
                 System.out.println("\uD83C\uDFB2 : "+x);
+                if(x < 6){
+                    cp.tirerCarte();
+                }
                 Scanner sc2 = new Scanner(System.in);
                 int k = 0;
                 while(k<x){

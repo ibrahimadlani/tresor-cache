@@ -9,4 +9,11 @@ public class Carte {
         this.salle = salle;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public Salle getSalle() {
+        return salle;
+    }
 }

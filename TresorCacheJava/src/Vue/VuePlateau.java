@@ -7,6 +7,7 @@ import Modele.Joueur;
 import java.util.ArrayList;
 
 public class VuePlateau {
+
     public void affichage(ArrayList<ArrayList<Case>> plateau,ArrayList<Joueur> listeJoueur){
         String affiche = "+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+";
         for(int i = 0; i < 11; i++){
@@ -35,5 +36,10 @@ public class VuePlateau {
             }
         }
         System.out.println(affiche);
+    }
+
+    public void tirageDeCarte(String message){
+        System.out.println("\nTirage de carte en cours...");
+        System.out.println(message);
     }
 }

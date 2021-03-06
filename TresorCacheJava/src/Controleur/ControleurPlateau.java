@@ -302,6 +302,11 @@ public class ControleurPlateau {
         }
     }
 
+    public void tirerCarte(){
+        String messageRetour = p.tirerCarte();
+        vue.tirageDeCarte(messageRetour);
+    }
+
 
     public void afficher(){
         vue.affichage(p.getMatrice(),p.listeJoueurs());

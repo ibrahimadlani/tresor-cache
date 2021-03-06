@@ -7,7 +7,7 @@ public class Paquet {
     private ArrayList<Carte> paquet;
 
     public Paquet(Plateau p){
-        ArrayList<Carte> paquet = new ArrayList<Carte>();
+        paquet = new ArrayList<Carte>();
         paquet.add(new Carte("A",p.getListeSalle().get(0)));
         paquet.add(new Carte("B",p.getListeSalle().get(1)));
         paquet.add(new Carte("C",p.getListeSalle().get(2)));
@@ -21,6 +21,7 @@ public class Paquet {
         paquet.add(new Carte("K",p.getListeSalle().get(10)));
         paquet.add(new Carte("L",p.getListeSalle().get(11)));
         paquet.add(new Carte("Melange",null));
+        Collections.shuffle(paquet);
     }
 
     public Paquet(ArrayList<Carte> paquet){
@@ -28,7 +29,7 @@ public class Paquet {
     }
 
     public Paquet(){
-        ArrayList<Carte> paquet = new ArrayList<Carte>();
+        paquet = new ArrayList<Carte>();
     }
 
     public void melanger(Paquet p){
@@ -42,9 +43,10 @@ public class Paquet {
     }
 
     public Carte piocher(Paquet p){
-        this.paquet.remove(paquet.get(paquet.size()-1));
-        p.paquet.add(paquet.get(paquet.size()-1));
-        return this.paquet.get(0);
+        Carte c = paquet.get(paquet.size()-1);
+        p.paquet.add(c);
+        paquet.remove(c);
+        return c;
     }
 
     public ArrayList<Carte> getPaquet() {
@@ -54,4 +56,6 @@ public class Paquet {
     public void setPaquet(ArrayList<Carte> paquet) {
         this.paquet = paquet;
     }
+
+    
 }

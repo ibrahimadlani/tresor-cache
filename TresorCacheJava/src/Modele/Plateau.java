@@ -264,6 +264,30 @@ public class Plateau {
         return paquet2;
     }
 
+    public String tirerCarte(){
+        Carte c = paquet1.piocher(paquet2);
+        if(c.getNom() == "Melange"){
+            paquet1.melanger(paquet2);
+            return "Mélange de la pioche et du paquet";
+        }else{
+            Salle destination = c.getSalle();
+            if(destination.getListeFantomes().size() == 2){
+                destination.getListeFantomes().clear();
+                destination.getListeFantomes().add(new FantomeRouge(destination));
+                return "Ajout d'un fantome rouge dans la salle " + c.getNom();
+            }else if(destination.getListeFantomes().size() == 1 && destination.getListeFantomes().get(0) instanceof FantomeRouge){
+                tirerCarte();
+                System.out.println("Il y à déja un fantome rouge, joueur retire une carte");
+            }else{
+                destination.addFantome();
+                return "Ajout d'un fantome vert dans la salle " + c.getNom();
+            }
+        }
+
+        return "Error";
+    }
+
+
     public ArrayList<Joueur> listeJoueurs() {
         return listeJoueurs;
     }
