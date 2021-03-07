@@ -62,29 +62,29 @@ public class Plateau {
         portesK.add(matrice.get(7).get(0));
         portesL.add(matrice.get(8).get(6));
 
-        matrice.get(0).set(1, new Salle(1,0,"A", portesA));
-        matrice.get(0).set(4, new Salle(4,0,"B", portesB));
+        matrice.get(0).set(1, new Salle(1,0,"A", portesA,true));
+        matrice.get(0).set(4, new Salle(4,0,"B", portesB,false));
         matrice.get(1).set(0, new Couloir(0,1));
         matrice.get(1).set(1, new Couloir(1,1));
         matrice.get(1).set(2, new Couloir(2,1));
         matrice.get(1).set(3, new Couloir(3,1));
         matrice.get(1).set(4, new Couloir(4,1));
-        matrice.get(1).set(7, new Salle(7,1,"C", portesC));
-        matrice.get(2).set(1, new Salle(1,2,"E", portesE));
+        matrice.get(1).set(7, new Salle(7,1,"C", portesC,true));
+        matrice.get(2).set(1, new Salle(1,2,"E", portesE,true));
         matrice.get(2).set(4, new Couloir(4,2));
         matrice.get(2).set(5, new Couloir(5,2));
         matrice.get(2).set(6, new Couloir(6,2));
         matrice.get(2).set(7, new Couloir(7,2));
         matrice.get(2).set(8, new Couloir(8,2));
-        matrice.get(2).set(9, new Salle(9,2,"D", portesD));
-        matrice.get(3).set(4, new Salle(4,3,"F", portesF));
+        matrice.get(2).set(9, new Salle(9,2,"D", portesD,true));
+        matrice.get(3).set(4, new Salle(4,3,"F", portesF,false));
         matrice.get(3).set(6, new Couloir(6,3));
         matrice.get(4).set(5, matrice.get(3).get(4));
-        matrice.get(3).set(7, new Salle(7,3,"G", portesG));
+        matrice.get(3).set(7, new Salle(7,3,"G", portesG,true));
         matrice.get(4).set(6, new Couloir(6,4));
         matrice.get(5).set(6, new Couloir(6,5));
-        matrice.get(6).set(1, new Salle(1,6,"H", portesH));
-        matrice.get(6).set(4, new Salle(4,6,"I", portesI));
+        matrice.get(6).set(1, new Salle(1,6,"H", portesH,false));
+        matrice.get(6).set(4, new Salle(4,6,"I", portesI,true));
         matrice.get(6).set(6, new Couloir(6,6));
         matrice.get(7).set(0, new Couloir(0,7));
         matrice.get(7).set(1, new Couloir(1,7));
@@ -93,25 +93,25 @@ public class Plateau {
         matrice.get(7).set(4, new Couloir(4,7));
         matrice.get(7).set(5, new Couloir(5,7));
         matrice.get(7).set(6, new Couloir(6,7));
-        matrice.get(8).set(0, new Salle(0,8,"K", portesK));
-        matrice.get(8).set(5, new Salle(5,8,"L", portesL));
+        matrice.get(8).set(0, new Salle(0,8,"K", portesK,false));
+        matrice.get(8).set(5, new Salle(5,8,"L", portesL,true));
         matrice.get(8).set(6, new Couloir(6,8));
-        matrice.get(8).set(7, new Salle(7,8,"J", portesJ));
+        matrice.get(8).set(7, new Salle(7,8,"J", portesJ,true));
         matrice.get(9).set(6, new Couloir(6,9));
         matrice.get(10).set(6, new Couloir(6,10)); // c'est l'entrée
 
-        listeSalle.add((Salle) matrice.get(0).get(1));
-        listeSalle.add((Salle) matrice.get(0).get(4));
-        listeSalle.add((Salle) matrice.get(1).get(7));
-        listeSalle.add((Salle) matrice.get(2).get(9));
-        listeSalle.add((Salle) matrice.get(2).get(1));
-        listeSalle.add((Salle) matrice.get(3).get(4));
-        listeSalle.add((Salle) matrice.get(3).get(7));
-        listeSalle.add((Salle) matrice.get(6).get(1));
-        listeSalle.add((Salle) matrice.get(6).get(4));
-        listeSalle.add((Salle) matrice.get(8).get(7));
-        listeSalle.add((Salle) matrice.get(8).get(0));
-        listeSalle.add((Salle) matrice.get(8).get(5));
+        listeSalle.add((Salle) matrice.get(0).get(1));//A 0
+        listeSalle.add((Salle) matrice.get(0).get(4));//B 1
+        listeSalle.add((Salle) matrice.get(1).get(7));//C 2
+        listeSalle.add((Salle) matrice.get(2).get(9));//D 3
+        listeSalle.add((Salle) matrice.get(2).get(1));//E 4
+        listeSalle.add((Salle) matrice.get(3).get(4));//F 5
+        listeSalle.add((Salle) matrice.get(3).get(7));//G 6
+        listeSalle.add((Salle) matrice.get(6).get(1));//H 7
+        listeSalle.add((Salle) matrice.get(6).get(4));//I 8
+        listeSalle.add((Salle) matrice.get(8).get(7));//J 9
+        listeSalle.add((Salle) matrice.get(8).get(0));//K 10
+        listeSalle.add((Salle) matrice.get(8).get(5));//L 11
 
 
         ArrayList<Salle> a = new ArrayList<Salle>();
@@ -123,7 +123,7 @@ public class Plateau {
 
         ArrayList<Salle> b = new ArrayList<Salle>();
         b.add(null);
-        b.add(listeSalle.get(0));
+        b.add(listeSalle.get(2));
         b.add(null);
         b.add(listeSalle.get(0));
         ((Salle) matrice.get(0).get(4)).setSallesAdjacentes(b);
@@ -131,62 +131,62 @@ public class Plateau {
         ArrayList<Salle> c = new ArrayList<Salle>();
         c.clear();
         c.add(null);
-        c.add(listeSalle.get(0));
+        c.add(listeSalle.get(3));
         c.add(null);
-        c.add(listeSalle.get(0));
+        c.add(listeSalle.get(1));
         ((Salle) matrice.get(1).get(7)).setSallesAdjacentes(c);
 
         ArrayList<Salle> d = new ArrayList<Salle>();
         d.clear();
         d.add(null);
-        d.add(listeSalle.get(0));
-        d.add(listeSalle.get(0));
         d.add(null);
+        d.add(null);
+        d.add(listeSalle.get(2));
         ((Salle) matrice.get(2).get(9)).setSallesAdjacentes(d);
 
         ArrayList<Salle> e = new ArrayList<Salle>();
         e.clear();
         e.add(null);
+        e.add(listeSalle.get(5));
+        e.add(listeSalle.get(7));
         e.add(null);
-        e.add(listeSalle.get(0));
-        e.add(listeSalle.get(0));
         ((Salle) matrice.get(2).get(1)).setSallesAdjacentes(e);
 
         ArrayList<Salle> f = new ArrayList<Salle>();
         f.clear();
         f.add(null);
         f.add(null);
-        f.add(null);
-        f.add(listeSalle.get(0));
+        f.add(listeSalle.get(8));
+        f.add(listeSalle.get(4));
         ((Salle) matrice.get(3).get(4)).setSallesAdjacentes(f);
 
         ArrayList<Salle> g = new ArrayList<Salle>();
         g.clear();
         g.add(null);
         g.add(null);
-        g.add(listeSalle.get(0));
+        g.add(listeSalle.get(9));
         g.add(null);
         ((Salle) matrice.get(3).get(7)).setSallesAdjacentes(g);
 
         ArrayList<Salle> h = new ArrayList<Salle>();
         h.clear();
-        h.add(listeSalle.get(0));
-        h.add(listeSalle.get(0));
+        h.add(listeSalle.get(4));
+        h.add(listeSalle.get(8));
         h.add(null);
         h.add(null);
         ((Salle) matrice.get(6).get(1)).setSallesAdjacentes(h);
 
         ArrayList<Salle> y = new ArrayList<Salle>();
 
-        y.add(listeSalle.get(0));
+        y.add(listeSalle.get(5));
         y.add(null);
         y.add(null);
-        y.add(listeSalle.get(0));
+        y.add(listeSalle.get(7));
         ((Salle) matrice.get(6).get(4)).setSallesAdjacentes(y);
 
         ArrayList<Salle> z = new ArrayList<Salle>();
 
-        z.add(listeSalle.get(0));
+        z.add(listeSalle.get(6));
         z.add(null);
         z.add(null);
         z.add(null);
@@ -194,7 +194,7 @@ public class Plateau {
 
         ArrayList<Salle> k = new ArrayList<Salle>();
         k.add(null);
-        k.add(listeSalle.get(0));
+        k.add(listeSalle.get(11));
         k.add(null);
         k.add(null);
         ((Salle) matrice.get(8).get(0)).setSallesAdjacentes(k);
@@ -203,7 +203,7 @@ public class Plateau {
         l.add(null);
         l.add(null);
         l.add(null);
-        l.add(listeSalle.get(0));
+        l.add(listeSalle.get(10));
         ((Salle) matrice.get(8).get(5)).setSallesAdjacentes(l);
 
 
@@ -268,19 +268,19 @@ public class Plateau {
         Carte c = paquet1.piocher(paquet2);
         if(c.getNom() == "Melange"){
             paquet1.melanger(paquet2);
-            return "Mélange de la pioche et du paquet";
+            return "\uD83C\uDCCF : Mélange de la pioche et du paquet";
         }else{
             Salle destination = c.getSalle();
             if(destination.getListeFantomes().size() == 2){
                 destination.getListeFantomes().clear();
                 destination.getListeFantomes().add(new FantomeRouge(destination));
-                return "Ajout d'un fantome rouge dans la salle " + c.getNom();
+                return "\uD83C\uDCCF : Ajout d'un fantome rouge dans la salle " + c.getNom();
             }else if(destination.getListeFantomes().size() == 1 && destination.getListeFantomes().get(0) instanceof FantomeRouge){
                 tirerCarte();
-                System.out.println("Il y à déja un fantome rouge, joueur retire une carte");
+                System.out.println("\uD83C\uDCCF : Il y à déja un fantome rouge, joueur retire une carte");
             }else{
                 destination.addFantome();
-                return "Ajout d'un fantome vert dans la salle " + c.getNom();
+                return "\uD83C\uDCCF : Ajout d'un fantome vert dans la salle " + c.getNom();
             }
         }
 
@@ -295,6 +295,8 @@ public class Plateau {
     public ArrayList<Salle> getListeSalle() {
         return listeSalle;
     }
+
+
 
     public int getNbFantomeRouge() {
         return nbFantomeRouge;

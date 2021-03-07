@@ -10,14 +10,14 @@ public class Salle extends Case{
     private ArrayList<Salle> sallesAdjacentes;
     private boolean fantomeRouge;
 
-    public Salle(int x, int y, String nom, ArrayList<Case> portes) {
+    public Salle(int x, int y, String nom, ArrayList<Case> portes,boolean t) {
         this.nom = nom;
         super.x = x;
         super.y = y;
         this.portes = portes;
         this.listeFantomes = new ArrayList<>();
         this.fantomeRouge = false;
-
+        this.tresor = t;
     }
 
     public Salle() {
@@ -45,26 +45,29 @@ public class Salle extends Case{
     public void addFantome(){
         if (this.listeFantomes.size() == 0) {
             this.listeFantomes.add(new FantomeVert(this));
-        }else if (this.listeFantomes.size() == 1 && !(this.listeFantomes.get(0) instanceof FantomeRouge)){
+        }else if (this.listeFantomes.size() == 1 && (this.listeFantomes.get(0) instanceof FantomeVert)){
             this.listeFantomes.add(new FantomeVert(this));
-        }else if (this.listeFantomes.size() == 2 && !(this.listeFantomes.get(0) instanceof FantomeRouge) && !(this.listeFantomes.get(1) instanceof FantomeRouge)){
+        }else if (this.listeFantomes.size() == 2 && (this.listeFantomes.get(0) instanceof FantomeVert) && (this.listeFantomes.get(1) instanceof FantomeVert)){
             this.listeFantomes.removeAll(listeFantomes);
             this.listeFantomes.add(new FantomeRouge(this));
             this.fantomeRouge = true;
         }else {
-            System.out.println("error");
+            System.out.println("Impossible d'ajouter un fantome a un fantome rouge");
         }
     }
 
     public void deleteFantome(){
         if (this.listeFantomes.size() == 0) {
-            System.out.println("error");
-        }else if (this.listeFantomes.size() == 1 && !(this.listeFantomes.get(0) instanceof FantomeRouge)){
-            this.listeFantomes.remove(this.listeFantomes.get(0));
-        }else if (this.listeFantomes.size() == 2 && !(this.listeFantomes.get(0) instanceof FantomeRouge) && !(this.listeFantomes.get(1) instanceof FantomeRouge)){
-            this.listeFantomes.remove(this.listeFantomes.get(0));
-        }else {
-            System.out.println("error");
+            System.out.println("Erreur");
+        }else if (this.listeFantomes.size() == 1 && (this.listeFantomes.get(0) instanceof FantomeVert)){
+            this.listeFantomes.clear();
+        }else if (this.listeFantomes.size() == 2 && (this.listeFantomes.get(0) instanceof FantomeVert) && (this.listeFantomes.get(1) instanceof FantomeVert)){
+            this.listeFantomes.remove(1);
+        }else if (this.listeFantomes.size() == 1 && (this.listeFantomes.get(0) instanceof FantomeRouge)){
+            this.listeFantomes.clear();
+            this.fantomeRouge = false;
+        } {
+            System.out.println("Impossible d'ajouter un fantome a un fantome rouge");
         }
     }
 

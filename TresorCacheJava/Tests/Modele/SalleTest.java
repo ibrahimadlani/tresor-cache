@@ -10,7 +10,7 @@ class SalleTest {
 
     @Test
     void isTresor() {
-        Salle s = new Salle(0, 1, "SalleTest", new ArrayList<Case>());
+        Salle s = new Salle(0, 1, "SalleTest", new ArrayList<Case>(),true);
         assertFalse(s.isTresor());
         s.setTresor(true);
         assertTrue(s.isTresor());
@@ -18,7 +18,7 @@ class SalleTest {
 
     @Test
     void addFantome() {
-        Salle s = new Salle(0, 1, "SalleTest", new ArrayList<Case>());
+        Salle s = new Salle(0, 1, "SalleTest", new ArrayList<Case>(),true);
         s.addFantome();
         assertTrue(s.getListeFantomes().size() == 1);
         s.addFantome();
@@ -31,7 +31,7 @@ class SalleTest {
 
     @Test
     void deleteFantome(){
-        Salle s = new Salle(0, 1, "SalleTest", new ArrayList<Case>());
+        Salle s = new Salle(0, 1, "SalleTest", new ArrayList<Case>(),true);
         s.addFantome();
         assertTrue(s.getListeFantomes().size() == 1);
         s.deleteFantome();

@@ -20,9 +20,7 @@ public class ControleurPlateau {
         this.p = new Plateau();
         this.vue = new VuePlateau();
     }
-
     public Plateau getP() { return p; }
-
     public void monterJoueur(Joueur j){
 
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
@@ -49,6 +47,7 @@ public class ControleurPlateau {
             }
             // DESTINATION : UNE SALLE ADJACENTES
             else if (salleOrigine.getSallesAdjacentes().get(0) != null){
+                System.out.println(salleOrigine.getSallesAdjacentes().get(0).getX()+";"+salleOrigine.getSallesAdjacentes().get(0).getY());
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setX(salleOrigine.getSallesAdjacentes().get(0).getX());
                 j.setY(salleOrigine.getSallesAdjacentes().get(0).getY());
@@ -57,6 +56,10 @@ public class ControleurPlateau {
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
                 System.out.println("La destination est bien une null");
+            }
+            // DESTINATION : COMBAT FANTOME ROUGE
+            else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
+                System.out.println("Combatez d'abord le fantome");
             }
         }
         // ORIGINE : UN COULOIR
@@ -85,6 +88,10 @@ public class ControleurPlateau {
             else if (caseDestination == null){ // DESTINATION : null
                 System.out.println("La destination est bien une null");
             }
+            // DESTINATION : OUT OF INDEX
+            else if (caseOrigine.getY()-1 < 0){
+                System.out.println("La destination est out of bound");
+            }
         }
 
     }
@@ -111,14 +118,19 @@ public class ControleurPlateau {
             }
             // DESTINATION : UNE SALLE ADJACENTES
             else if (salleOrigine.getSallesAdjacentes().get(2) != null){
+                System.out.println(salleOrigine.getSallesAdjacentes().get(2).getX()+";"+salleOrigine.getSallesAdjacentes().get(2).getY());
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setX(salleOrigine.getSallesAdjacentes().get(2).getX());
                 j.setY(salleOrigine.getSallesAdjacentes().get(2).getY());
-                p.getMatrice().get(j.getY()).get(j.getY()).ajouterJoueur(j);
+                p.getMatrice().get(salleOrigine.getSallesAdjacentes().get(2).getY()).get(salleOrigine.getSallesAdjacentes().get(2).getX()).ajouterJoueur(j);
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
                 System.out.println("La destination est bien une null");
+            }
+            // DESTINATION : COMBAT FANTOME ROUGE
+            else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
+                System.out.println("Combatez d'abord le fantome");
             }
         }
         // ORIGINE : UN COULOIR
@@ -151,7 +163,6 @@ public class ControleurPlateau {
 
 
     }
-
     public void droiteJoueur(Joueur j){
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
         Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX()+1);
@@ -165,7 +176,6 @@ public class ControleurPlateau {
             ArrayList<Salle> sallesAdjacentesSalle = ((Salle) caseOrigine).getSallesAdjacentes();
 
             Salle salleOrigine = (Salle) p.getMatrice().get(j.getY()).get(j.getX());
-            System.out.println("De Salle");
             // DESTINATION : UNE COULOIR
             if (caseDestination instanceof Couloir){
                 if ((caseDestination.getX() == salleOrigine.getPortes().get(0).getX() && caseDestination.getY() == salleOrigine.getPortes().get(0).getY())) {
@@ -180,14 +190,19 @@ public class ControleurPlateau {
             // DESTINATION : UNE SALLE ADJACENTES
 
             else if (salleOrigine.getSallesAdjacentes().get(1) != null){
+                System.out.println(salleOrigine.getSallesAdjacentes().get(1).getX()+";"+salleOrigine.getSallesAdjacentes().get(1).getY());
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setX(salleOrigine.getSallesAdjacentes().get(1).getX());
                 j.setY(salleOrigine.getSallesAdjacentes().get(1).getY());
-                p.getMatrice().get(j.getY()).get(j.getY()).ajouterJoueur(j);
+                p.getMatrice().get(salleOrigine.getSallesAdjacentes().get(1).getY()).get(salleOrigine.getSallesAdjacentes().get(1).getX()).ajouterJoueur(j);
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
                 System.out.println("La destination est bien une null");
+            }
+            // DESTINATION : COMBAT FANTOME ROUGE
+            else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
+                System.out.println("Combatez d'abord le fantome");
             }
         }
         // ORIGINE : UN COULOIR
@@ -217,6 +232,10 @@ public class ControleurPlateau {
             else if (caseDestination == null){ // DESTINATION : null
                 System.out.println("La destination est bien une null");
             }
+            // DESTINATION : OUT OF INDEX
+            else if (caseOrigine.getX()+1 > p.getMatrice().size()){
+                System.out.println("La destination est out of bound");
+            }
         }
 
     }
@@ -243,14 +262,19 @@ public class ControleurPlateau {
             }
             // DESTINATION : UNE SALLE ADJACENTES
             else if (salleOrigine.getSallesAdjacentes().get(3) != null){
+                System.out.println(salleOrigine.getSallesAdjacentes().get(3).getX()+";"+salleOrigine.getSallesAdjacentes().get(3).getY());
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setX(salleOrigine.getSallesAdjacentes().get(3).getX());
                 j.setY(salleOrigine.getSallesAdjacentes().get(3).getY());
-                p.getMatrice().get(j.getY()).get(j.getY()).ajouterJoueur(j);
+                p.getMatrice().get(salleOrigine.getSallesAdjacentes().get(3).getY()).get(salleOrigine.getSallesAdjacentes().get(3).getX()).ajouterJoueur(j);
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
                 System.out.println("La destination est bien une null");
+            }
+            // DESTINATION : COMBAT FANTOME ROUGE
+            else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
+                System.out.println("Combatez d'abord le fantome");
             }
         }
         // ORIGINE : UN COULOIR
@@ -280,19 +304,38 @@ public class ControleurPlateau {
             else if (caseDestination == null){ // DESTINATION : null
                 System.out.println("La destination est bien une null");
             }
+            // DESTINATION : OUT OF INDEX
+            else if (caseOrigine.getX()-1 < 0){
+                System.out.println("La destination est out of bound");
+            }
         }
 
     }
 
     public void prendreTresor(Joueur j){
-        if (p.getMatrice().get(j.getY()).get(j.getX()) instanceof Salle && ((Salle) p.getMatrice().get(j.getY()).get(j.getX())).isTresor() && j.isTresor() == false){
-            Salle emplacement = (Salle) p.getMatrice().get(j.getY()).get(j.getX());
-            emplacement.setTresor(false);
-            j.setTresor(true);
-            if (emplacement.isFantomeRouge()){
-                //combat
-            }
+        if (p.getMatrice().get(j.getY()).get(j.getX()) instanceof Salle){
+            if (((Salle) p.getMatrice().get(j.getY()).get(j.getX())).isTresor()){
+                if (j.isTresor() == false){
+                    Salle emplacement = (Salle) p.getMatrice().get(j.getY()).get(j.getX());
+                    emplacement.setTresor(false);
+                    j.setTresor(true);
+                    if (((Salle) p.getMatrice().get(j.getY()).get(j.getX())).isFantomeRouge()){
 
+                        if ((p.getMatrice().get(j.getY()).get(j.getX())).getJoueurs().size() >= 2){
+                            System.out.println("Combat fantome rouge");
+                            this.combatRouge(j,j,((Salle) p.getMatrice().get(j.getY()).get(j.getX())));
+                        }else {
+                            System.out.println("HELP ! Vous ne pouvez pas combatre le fantome seule");
+                        }
+                    }
+                }else {
+                    System.out.println("Vous avez deja un tresor sur vous");
+                }
+            }else {
+                System.out.println("La salle n'a pas de tresor");
+            }
+        }else{
+            System.out.println("Vous n'etes pas dans une salle");
         }
     }
     public void depotTresor(Joueur j){
@@ -307,9 +350,60 @@ public class ControleurPlateau {
         vue.tirageDeCarte(messageRetour);
     }
 
+    public void combatVert(Joueur j, Salle s){
+        Scanner sc = new Scanner(System.in);
+        String enter = sc.nextLine();
+        while (enter == null) {
+            System.out.println("\n["+j.getNom()+"] : Appuyer sur ENTRER pour combatre le fantome vert");
+            enter = sc.nextLine();
+        }
+        if (!s.isFantomeRouge() && s.getListeFantomes().size() > 0){
+            if (p.getDeCombat1().roll() == 1){
+                //SupprimerFantomeVert
+            }else {
+                System.out.println("Defaite Combat");
+            }
+        }
+    }
 
+    public void combatRouge(Joueur j1,Joueur j2, Salle s) {
+        Scanner sc = new Scanner(System.in);
+        String enter = sc.nextLine();
+        while (enter == null) {
+            System.out.println("\n[" + j1.getNom() + "] : Appuyer sur ENTRER pour combatre le fantome vert");
+            enter = sc.nextLine();
+        }
+        if (s.isFantomeRouge() && s.getListeFantomes().size() > 0) {
+            if (p.getDeCombat1().roll() == 2) {
+                //SupprimerFantomeRouge
+            } else {
+                Scanner sc2 = new Scanner(System.in);
+                String enter2 = sc.nextLine();
+                while (enter2 == null) {
+                    System.out.println("\n[" + j2.getNom() + "] : Appuyer sur ENTRER pour combatre le fantome vert");
+                    enter = sc.nextLine();
+                }
+                if (s.isFantomeRouge() && s.getListeFantomes().size() > 0) {
+                    if (p.getDeCombat1().roll() == 2) {
+                        //SupprimerFantomeRouge
+                    } else {
+                        System.out.println("Defaite Combat");
+                    }
+
+                }
+            }
+        }
+    }
+
+    /*public void combat(Joueur j1){
+        Salle s = ((Salle) p.getMatrice().get(j1.getY()).get(j1.getX()));
+        if (s.isFantomeRouge()){
+            if (.isFantomeRouge()){
+
+            }
+        }
+    }*/
     public void afficher(){
-        vue.affichage(p.getMatrice(),p.listeJoueurs());
+        vue.affichage(p.getMatrice(),p.listeJoueurs(),p.getNbTresor());
     }
 }
-
