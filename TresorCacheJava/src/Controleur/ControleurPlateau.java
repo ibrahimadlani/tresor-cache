@@ -21,10 +21,21 @@ public class ControleurPlateau {
         this.vue = new VuePlateau();
     }
     public Plateau getP() { return p; }
-    public void monterJoueur(Joueur j){
+
+    public boolean monterJoueur(Joueur j){
 
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
-        Case caseDestination = p.getMatrice().get(j.getY()-1).get(j.getX());
+        Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX());
+        try {
+            caseDestination = p.getMatrice().get(j.getY()-1).get(j.getX());
+            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
+                System.out.println("Impossible !!!");
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println("Impossible !!!");
+            return false;
+        }
 
         boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
         boolean isCaseDestinationSalle = caseDestination instanceof Salle;
@@ -93,12 +104,24 @@ public class ControleurPlateau {
                 System.out.println("La destination est out of bound");
             }
         }
+        return true;
 
     }
-    public void descendreJoueur(Joueur j){
+    public boolean descendreJoueur(Joueur j){
 
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
-        Case caseDestination = p.getMatrice().get(j.getY()+1).get(j.getX());
+        Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX());
+
+        try {
+            caseDestination = p.getMatrice().get(j.getY() + 1).get(j.getX());
+            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
+                System.out.println("Impossible !!!");
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println("Impossible !!!");
+            return false;
+        }
 
         boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
         boolean isCaseDestinationSalle = caseDestination instanceof Salle;
@@ -161,11 +184,22 @@ public class ControleurPlateau {
             }
         }
 
-
+    return true;
     }
-    public void droiteJoueur(Joueur j){
+    public boolean droiteJoueur(Joueur j){
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
-        Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX()+1);
+        Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX());
+
+        try {
+            caseDestination = p.getMatrice().get(j.getY()).get(j.getX()+1);
+            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
+                System.out.println("Impossible !!!");
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println("Impossible !!!");
+            return false;
+        }
 
         boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
         boolean isCaseDestinationSalle = caseDestination instanceof Salle;
@@ -237,12 +271,24 @@ public class ControleurPlateau {
                 System.out.println("La destination est out of bound");
             }
         }
-
+        return true;
     }
-    public void gaucheJoueur(Joueur j){
+    public boolean gaucheJoueur(Joueur j){
 
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
         Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX()-1);
+
+        try {
+            caseDestination = p.getMatrice().get(j.getY()).get(j.getX()-1);
+            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
+                System.out.println("Impossible !!!");
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println("Impossible !!!");
+            return false;
+        }
+
         boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
         boolean isCaseDestinationSalle = caseDestination instanceof Salle;
 
@@ -309,7 +355,7 @@ public class ControleurPlateau {
                 System.out.println("La destination est out of bound");
             }
         }
-
+        return true;
     }
 
     public void prendreTresor(Joueur j){

@@ -34,21 +34,26 @@ public class Main {
                 while(k<x){
                     System.out.println("\n[ "+cp.getP().listeJoueurs().get(j).getNom()+" ] : Quel mouvemement voulez-vous faire ? ("+(x-k)+" restant(s)...)");
                     int mouv = sc2.nextInt();
+                    boolean mouvementEffectue;
                     if (mouv == 8){
-                        cp.monterJoueur(cp.getP().listeJoueurs().get(j));
-                        k++;
+                        if(cp.monterJoueur(cp.getP().listeJoueurs().get(j))){
+                            k++;
+                        }
                         cp.afficher();
                     }else if (mouv == 2){
-                        cp.descendreJoueur(cp.getP().listeJoueurs().get(j));
-                        k++;
+                        if(cp.descendreJoueur(cp.getP().listeJoueurs().get(j))){
+                            k++;
+                        }
                         cp.afficher();
                     }else if(mouv == 4){
-                        cp.gaucheJoueur(cp.getP().listeJoueurs().get(j));
-                        k++;
+                        if(cp.gaucheJoueur(cp.getP().listeJoueurs().get(j))) {
+                            k++;
+                        }
                         cp.afficher();
                     }else if(mouv == 6){
-                        cp.droiteJoueur(cp.getP().listeJoueurs().get(j));
-                        k++;
+                        if(cp.droiteJoueur(cp.getP().listeJoueurs().get(j))){
+                            k++;
+                        }
                         cp.afficher();
                     }else if(mouv == 1){
                         cp.prendreTresor(cp.getP().listeJoueurs().get(j));

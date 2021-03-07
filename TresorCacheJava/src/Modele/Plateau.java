@@ -266,14 +266,14 @@ public class Plateau {
 
     public String tirerCarte(){
         Carte c = paquet1.piocher(paquet2);
+        System.out.println("La carte tirée est " + c.getNom());
         if(c.getNom() == "Melange"){
             paquet1.melanger(paquet2);
             return "\uD83C\uDCCF : Mélange de la pioche et du paquet";
         }else{
             Salle destination = c.getSalle();
             if(destination.getListeFantomes().size() == 2){
-                destination.getListeFantomes().clear();
-                destination.getListeFantomes().add(new FantomeRouge(destination));
+                destination.addFantome();
                 return "\uD83C\uDCCF : Ajout d'un fantome rouge dans la salle " + c.getNom();
             }else if(destination.getListeFantomes().size() == 1 && destination.getListeFantomes().get(0) instanceof FantomeRouge){
                 tirerCarte();
