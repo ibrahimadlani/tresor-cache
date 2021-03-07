@@ -34,6 +34,9 @@ public class Main {
                 while(k<x){
                     System.out.println("\n[ "+cp.getP().listeJoueurs().get(j).getNom()+" ] : Quel mouvemement voulez-vous faire ? ("+(x-k)+" restant(s)...)");
                     int mouv = sc2.nextInt();
+                    if(mouv != 8 || mouv != 4 || mouv != 6 || mouv != 2 || mouv != 1 || mouv != 3 || mouv != 0 || mouv != 5){
+                        cp.erreurEntree();
+                    }
                     boolean mouvementEffectue;
                     if (mouv == 8){
                         if(cp.monterJoueur(cp.getP().listeJoueurs().get(j))){

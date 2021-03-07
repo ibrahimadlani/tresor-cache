@@ -274,6 +274,7 @@ public class Plateau {
             Salle destination = c.getSalle();
             if(destination.getListeFantomes().size() == 2){
                 destination.addFantome();
+                this.nbFantomeRouge++;
                 return "\uD83C\uDCCF : Ajout d'un fantome rouge dans la salle " + c.getNom();
             }else if(destination.getListeFantomes().size() == 1 && destination.getListeFantomes().get(0) instanceof FantomeRouge){
                 tirerCarte();

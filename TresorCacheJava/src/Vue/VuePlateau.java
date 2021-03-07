@@ -62,4 +62,20 @@ public class VuePlateau {
         System.out.println("\n\uD83C\uDCCF : Tirage de carte en cours...");
         System.out.println(message);
     }
+
+    public void erreurEntree(){
+        System.out.println("Merci de rentrer une action valide\n");
+    }
+
+    public void erreurDeplacement(){
+        System.out.println("Merci de faire un déplacement valide\n");
+    }
+
+    public void messageCombatAvantDeplacement(){
+        System.out.println("Vous devez d'abbord combatre le fantome avant de vous déplacer");
+    }
+
+    public void erreurTresor(String s){
+        System.out.println(s);
+    }
 }

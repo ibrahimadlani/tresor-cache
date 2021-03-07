@@ -38,6 +38,7 @@ public class Salle extends Case{
     }
 
 
+
     public void setSallesAdjacentes(ArrayList<Salle> sallesAdjacentes) {
         this.sallesAdjacentes = sallesAdjacentes;
     }

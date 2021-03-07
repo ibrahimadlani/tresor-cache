@@ -29,11 +29,11 @@ public class ControleurPlateau {
         try {
             caseDestination = p.getMatrice().get(j.getY()-1).get(j.getX());
             if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
-                System.out.println("Impossible !!!");
+                vue.erreurDeplacement();
                 return false;
             }
         }catch (Exception e){
-            System.out.println("Impossible !!!");
+            vue.erreurDeplacement();
             return false;
         }
 
@@ -48,7 +48,6 @@ public class ControleurPlateau {
 
             // DESTINATION : UNE COULOIR
             if (caseDestination instanceof Couloir){
-                System.out.println("Vers un couloir");
                 if ((salleOrigine.getPortes().get(0).getX() == caseDestination.getX() && salleOrigine.getPortes().get(0).getY() == caseDestination.getY())){
                     p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                     j.setX((salleOrigine.getPortes().get(0).getX()));
@@ -66,11 +65,10 @@ public class ControleurPlateau {
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
             // DESTINATION : COMBAT FANTOME ROUGE
             else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
-                System.out.println("Combatez d'abord le fantome");
+                vue.messageCombatAvantDeplacement();
             }
         }
         // ORIGINE : UN COULOIR
@@ -78,30 +76,24 @@ public class ControleurPlateau {
             // DESTINATION : UNE SALLE
             if (caseDestination instanceof Salle){
                 Salle salleDestination =  (Salle) caseDestination;
-                System.out.println("Destination Salle");
                 if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())||(salleDestination.getPortes().get(1).getX() == caseOrigine.getX() && salleDestination.getPortes().get(1).getY() == caseOrigine.getY())){
-                    System.out.println("La destination est bien une porte vers une salle");
                     p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                     j.setY(j.getY()-1);
                     p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
                 }else{
-                    System.out.println("La destination n'est pas une porte vers une salle");
                 }
             }
             // DESTINATION : UN COULOIR
             else if (caseDestination instanceof Couloir){
-                System.out.println("La destination est un autre couloir");
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setY(j.getY()-1);
                 p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
             // DESTINATION : OUT OF INDEX
             else if (caseOrigine.getY()-1 < 0){
-                System.out.println("La destination est out of bound");
             }
         }
         return true;
@@ -115,11 +107,11 @@ public class ControleurPlateau {
         try {
             caseDestination = p.getMatrice().get(j.getY() + 1).get(j.getX());
             if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
-                System.out.println("Impossible !!!");
+                vue.erreurDeplacement();
                 return false;
             }
         }catch (Exception e){
-            System.out.println("Impossible !!!");
+            vue.erreurDeplacement();
             return false;
         }
 
@@ -149,11 +141,10 @@ public class ControleurPlateau {
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
             // DESTINATION : COMBAT FANTOME ROUGE
             else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
-                System.out.println("Combatez d'abord le fantome");
+                vue.messageCombatAvantDeplacement();
             }
         }
         // ORIGINE : UN COULOIR
@@ -161,26 +152,21 @@ public class ControleurPlateau {
             // DESTINATION : UNE SALLE
             if (caseDestination instanceof Salle){
                 Salle salleDestination =  (Salle) caseDestination;
-                System.out.println("Destination Salle");
                 if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())){
-                    System.out.println("La destination est bien une porte vers une salle");
                     p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                     j.setY(j.getY()+1);
                     p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
                 }else{
-                    System.out.println("La destination n'est pas une porte vers une salle");
                 }
             }
             // DESTINATION : UN COULOIR
             else if (caseDestination instanceof Couloir){
-                System.out.println("La destination est un autre couloir");
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setY(j.getY()+1);
                 p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
         }
 
@@ -193,11 +179,11 @@ public class ControleurPlateau {
         try {
             caseDestination = p.getMatrice().get(j.getY()).get(j.getX()+1);
             if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
-                System.out.println("Impossible !!!");
+                vue.erreurDeplacement();
                 return false;
             }
         }catch (Exception e){
-            System.out.println("Impossible !!!");
+            vue.erreurDeplacement();
             return false;
         }
 
@@ -232,11 +218,10 @@ public class ControleurPlateau {
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
             // DESTINATION : COMBAT FANTOME ROUGE
             else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
-                System.out.println("Combatez d'abord le fantome");
+                vue.messageCombatAvantDeplacement();
             }
         }
         // ORIGINE : UN COULOIR
@@ -245,30 +230,24 @@ public class ControleurPlateau {
             // DESTINATION : UNE SALLE
             if (caseDestination instanceof Salle){
                 Salle salleDestination =  (Salle) caseDestination;
-                System.out.println("Destination Salle");
                 if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())||(salleDestination.getPortes().get(1).getX() == caseOrigine.getX() && salleDestination.getPortes().get(1).getY() == caseOrigine.getY())){
-                    System.out.println("La destination est bien une porte vers une salle");
                     p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                     j.setX(j.getX()+1);
                     p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
                 }else{
-                    System.out.println("La destination n'est pas une porte vers une salle");
                 }
             }
             // DESTINATION : UN COULOIR
             else if (caseDestination instanceof Couloir){
-                System.out.println("La destination est un autre couloir");
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setX(j.getX()+1);
                 p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
             // DESTINATION : OUT OF INDEX
             else if (caseOrigine.getX()+1 > p.getMatrice().size()){
-                System.out.println("La destination est out of bound");
             }
         }
         return true;
@@ -281,11 +260,11 @@ public class ControleurPlateau {
         try {
             caseDestination = p.getMatrice().get(j.getY()).get(j.getX()-1);
             if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
-                System.out.println("Impossible !!!");
+                vue.erreurDeplacement();
                 return false;
             }
         }catch (Exception e){
-            System.out.println("Impossible !!!");
+            vue.erreurDeplacement();
             return false;
         }
 
@@ -316,11 +295,10 @@ public class ControleurPlateau {
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
             // DESTINATION : COMBAT FANTOME ROUGE
             else if (j.isTresor() && ((Salle) caseOrigine).isFantomeRouge()){
-                System.out.println("Combatez d'abord le fantome");
+                vue.messageCombatAvantDeplacement();
             }
         }
         // ORIGINE : UN COULOIR
@@ -329,30 +307,24 @@ public class ControleurPlateau {
             // DESTINATION : UNE SALLE
             if (caseDestination instanceof Salle){
                 Salle salleDestination =  (Salle) caseDestination;
-                System.out.println("Destination Salle");
                 if ((salleDestination.getPortes().get(0).getX() == caseOrigine.getX() && salleDestination.getPortes().get(0).getY() == caseOrigine.getY())||(salleDestination.getPortes().get(1).getX() == caseOrigine.getX() && salleDestination.getPortes().get(1).getY() == caseOrigine.getY())){
-                    System.out.println("La destination est bien une porte vers une salle");
                     p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                     j.setX(j.getX()-1);
                     p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
                 }else{
-                    System.out.println("La destination n'est pas une porte vers une salle");
                 }
             }
             // DESTINATION : UN COULOIR
             else if (caseDestination instanceof Couloir){
-                System.out.println("La destination est un autre couloir");
                 p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                 j.setX(j.getX()-1);
                 p.getMatrice().get(j.getY()).get(j.getX()).ajouterJoueur(j);
             }
             // DESTINATION : NULL
             else if (caseDestination == null){ // DESTINATION : null
-                System.out.println("La destination est bien une null");
             }
             // DESTINATION : OUT OF INDEX
             else if (caseOrigine.getX()-1 < 0){
-                System.out.println("La destination est out of bound");
             }
         }
         return true;
@@ -368,20 +340,20 @@ public class ControleurPlateau {
                     if (((Salle) p.getMatrice().get(j.getY()).get(j.getX())).isFantomeRouge()){
 
                         if ((p.getMatrice().get(j.getY()).get(j.getX())).getJoueurs().size() >= 2){
-                            System.out.println("Combat fantome rouge");
+                            vue.erreurTresor("Combat fantome rouge");
                             this.combatRouge(j,j,((Salle) p.getMatrice().get(j.getY()).get(j.getX())));
                         }else {
-                            System.out.println("HELP ! Vous ne pouvez pas combatre le fantome seule");
+                            vue.erreurTresor("HELP ! Vous ne pouvez pas combatre le fantome seule");
                         }
                     }
                 }else {
-                    System.out.println("Vous avez deja un tresor sur vous");
+                    vue.erreurTresor("Vous avez deja un tresor sur vous");
                 }
             }else {
-                System.out.println("La salle n'a pas de tresor");
+                vue.erreurTresor("La salle n'a pas de tresor");
             }
         }else{
-            System.out.println("Vous n'etes pas dans une salle");
+            vue.erreurTresor("Vous n'etes pas dans une salle");
         }
     }
     public void depotTresor(Joueur j){
@@ -435,7 +407,6 @@ public class ControleurPlateau {
                     } else {
                         System.out.println("Defaite Combat");
                     }
-
                 }
             }
         }
@@ -449,6 +420,11 @@ public class ControleurPlateau {
             }
         }
     }*/
+
+    public void erreurEntree(){
+        vue.erreurEntree();
+    }
+
     public void afficher(){
         vue.affichage(p.getMatrice(),p.listeJoueurs(),p.getNbTresor());
     }
