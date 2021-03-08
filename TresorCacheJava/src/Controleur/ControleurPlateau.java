@@ -26,19 +26,20 @@ public class ControleurPlateau {
 
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
         Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX());
-        try {
-            caseDestination = p.getMatrice().get(j.getY()-1).get(j.getX());
-            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
-                vue.erreurDeplacement();
-                return false;
-            }
-        }catch (Exception e){
-            vue.erreurDeplacement();
-            return false;
-        }
 
         boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
         boolean isCaseDestinationSalle = caseDestination instanceof Salle;
+
+            try {
+                caseDestination = p.getMatrice().get(j.getY() - 1).get(j.getX());
+                if (!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir) && !iscaseOrigineSalle) {
+                    vue.erreurDeplacement();
+                    return false;
+                }
+            } catch (Exception e) {
+                vue.erreurDeplacement();
+                return false;
+            }
 
         // ORIGINE : UNE SALLE
         if (iscaseOrigineSalle){
@@ -48,6 +49,7 @@ public class ControleurPlateau {
 
             // DESTINATION : UNE COULOIR
             if (caseDestination instanceof Couloir){
+                System.out.println("yes il va dans couloir");
                 if ((salleOrigine.getPortes().get(0).getX() == caseDestination.getX() && salleOrigine.getPortes().get(0).getY() == caseDestination.getY())){
                     p.getMatrice().get(j.getY()).get(j.getX()).suppprimerJoueur(j);
                     j.setX((salleOrigine.getPortes().get(0).getX()));
@@ -104,19 +106,19 @@ public class ControleurPlateau {
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
         Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX());
 
-        try {
-            caseDestination = p.getMatrice().get(j.getY() + 1).get(j.getX());
-            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
+        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
+        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
+
+            try {
+                caseDestination = p.getMatrice().get(j.getY() + 1).get(j.getX());
+                if (!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir) && !iscaseOrigineSalle) {
+                    vue.erreurDeplacement();
+                    return false;
+                }
+            } catch (Exception e) {
                 vue.erreurDeplacement();
                 return false;
             }
-        }catch (Exception e){
-            vue.erreurDeplacement();
-            return false;
-        }
-
-        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
-        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
 
         // ORIGINE : UNE SALLE
         if (iscaseOrigineSalle){
@@ -176,19 +178,19 @@ public class ControleurPlateau {
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
         Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX());
 
-        try {
-            caseDestination = p.getMatrice().get(j.getY()).get(j.getX()+1);
-            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
+        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
+        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
+
+            try {
+                caseDestination = p.getMatrice().get(j.getY()).get(j.getX() + 1);
+                if (!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir) && !iscaseOrigineSalle) {
+                    vue.erreurDeplacement();
+                    return false;
+                }
+            } catch (Exception e) {
                 vue.erreurDeplacement();
                 return false;
             }
-        }catch (Exception e){
-            vue.erreurDeplacement();
-            return false;
-        }
-
-        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
-        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
 
         // ORIGINE : UNE SALLE
         if (iscaseOrigineSalle){
@@ -255,21 +257,21 @@ public class ControleurPlateau {
     public boolean gaucheJoueur(Joueur j){
 
         Case caseOrigine = p.getMatrice().get(j.getY()).get(j.getX());
-        Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX()-1);
+        Case caseDestination = p.getMatrice().get(j.getY()).get(j.getX());
+        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
+        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
 
-        try {
-            caseDestination = p.getMatrice().get(j.getY()).get(j.getX()-1);
-            if(!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir)){
+            try {
+                caseDestination = p.getMatrice().get(j.getY()).get(j.getX() - 1);
+                if (!(caseDestination instanceof Salle) && !(caseDestination instanceof Couloir) && !iscaseOrigineSalle) {
+                    vue.erreurDeplacement();
+                    return false;
+                }
+            } catch (Exception e) {
                 vue.erreurDeplacement();
                 return false;
             }
-        }catch (Exception e){
-            vue.erreurDeplacement();
-            return false;
-        }
 
-        boolean iscaseOrigineSalle = caseOrigine instanceof Salle;
-        boolean isCaseDestinationSalle = caseDestination instanceof Salle;
 
         // ORIGINE : UNE SALLE
         if (iscaseOrigineSalle){
