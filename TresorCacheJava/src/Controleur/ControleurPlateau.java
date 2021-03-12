@@ -6,6 +6,7 @@ import Vue.VuePlateau;
 import Vue.vueSalle;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ControleurPlateau {
@@ -21,6 +22,30 @@ public class ControleurPlateau {
         this.vue = new VuePlateau();
     }
     public Plateau getP() { return p; }
+
+    public void initNbJoueur(){
+        int nbJoueur = vue.initNbJoueur();
+        p.setNbJoueurs(nbJoueur);
+    }
+
+    public void initJoueurs(){
+        ArrayList<Joueur> listeJoueurs = vue.initJoueurs(p.getNbJoueurs());
+        p.setListeJoueurs(listeJoueurs);
+        for (Joueur j:
+                listeJoueurs ) {
+            p.getMatrice().get(10).get(6).ajouterJoueur(j);
+        }
+    }
+
+    public int rolling(){
+        Random r = new Random();
+        int x = r.nextInt(6)+1;
+        vue.rolling(x);
+        if(x < 6){
+            tirerCarte();
+        }
+        return x;
+    }
 
     public boolean monterJoueur(Joueur j){
 
@@ -412,6 +437,22 @@ public class ControleurPlateau {
                 }
             }
         }
+    }
+
+    public void affichageTourJoueur(int j){
+        vue.affichageTourJoueur(p.listeJoueurs().get(j).getNom());
+    }
+
+    public void affichageNom(int j){
+        vue.affichageNom(p.listeJoueurs().get(j).getNom());
+    }
+
+    public void affichageMouvementRestant(int j, int mouvements){
+        vue.affichageMouvementRestant(j, mouvements);
+    }
+
+    public void affichagePauseThematique(){
+        vue.affichagePauseThematique();
     }
 
     /*public void combat(Joueur j1){

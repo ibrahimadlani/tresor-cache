@@ -7,32 +7,29 @@ public class Main {
     public static void main(String[] args) {
         ControleurPlateau cp = new ControleurPlateau();
 
+        cp.initNbJoueur(); //initialisation du nombre de joueurs
+        cp.initJoueurs(); //initialisation des noms et de la positions des joueurs
+
         Scanner sc = new Scanner(System.in);
         while (cp.getP().getNbTresor() < 6 || cp.getP().getNbFantomeRouge() < 6) {
-
-            System.out.println("-------------------------------------------------------------------------");
+            cp.affichagePauseThematique();
             for (int j = 0; j < cp.getP().listeJoueurs().size() ; j++) {
-                System.out.println("/!\\ Tour :"+cp.getP().listeJoueurs().get(j).getNom()+"/!\\ ");
-                System.out.println("\n["+cp.getP().listeJoueurs().get(j).getNom()+"] : Appuyer sur ENTRER pour lancer le dé");
+                cp.affichageTourJoueur(j);
+                cp.affichageNom(j);
 
                 String enter = sc.nextLine();
 
                 while (enter == null) {
-                    System.out.println("\n["+cp.getP().listeJoueurs().get(j).getNom()+"] : Appuyer sur ENTRER pour lancer le dé");
+                    cp.affichageNom(j);
                     enter = sc.nextLine();
                 }
 
-                Random r = new Random();
-                int x = r.nextInt(6)+1;
-
-                System.out.println("\uD83C\uDFB2 : rolling...\n\uD83C\uDFB2 : "+x);
-
-                if(x < 6){cp.tirerCarte();}
+                int x = cp.rolling();
 
                 Scanner sc2 = new Scanner(System.in);
                 int k = 0;
                 while(k<x){
-                    System.out.println("\n[ "+cp.getP().listeJoueurs().get(j).getNom()+" ] : Quel mouvemement voulez-vous faire ? ("+(x-k)+" restant(s)...)");
+                    cp.affichageMouvementRestant(j, x-k);
 
                     int mouv = sc2.nextInt();
 

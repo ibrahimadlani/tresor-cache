@@ -17,8 +17,6 @@ public class Plateau {
     private Paquet paquet1;
     private Paquet paquet2;
 
-
-
     public Plateau() {
         Scanner sc1 = new Scanner(System.in);
         for(int i = 0; i < 11; i++) {
@@ -205,30 +203,15 @@ public class Plateau {
         l.add(null);
         l.add(listeSalle.get(10));
         ((Salle) matrice.get(8).get(5)).setSallesAdjacentes(l);
-
-
-
         this.nbTresor = 0;
-        System.out.println("Entrez le nombre de joueurs (2 - 4):");
-
-        this.nbJoueurs = sc1.nextInt();
-        while (this.nbJoueurs > 4 || this.nbJoueurs < 2) {
-            System.out.println("Entrez le nombre de joueurs (2 - 4):");
-            this.nbJoueurs = sc1.nextInt();
-        }
-        this.listeJoueurs = new ArrayList<Joueur>();
-        Scanner sc2 = new Scanner(System.in);
-        for (int i = 0; i < this.nbJoueurs; i++) {
-            System.out.println("Entrez le nom du joueur #"+i+".");
-            String nom = sc2.nextLine();
-            Joueur j = new Joueur(nom);
-            listeJoueurs.add(j);
-            matrice.get(10).get(6).ajouterJoueur(j);
-        }
 
         this.paquet1 = new Paquet(this);
         this.paquet2 = new Paquet();
 
+    }
+
+    public int getNbJoueurs() {
+        return nbJoueurs;
     }
 
     public ArrayList<ArrayList<Case>> getMatrice() {
@@ -297,7 +280,13 @@ public class Plateau {
         return listeSalle;
     }
 
+    public void setNbJoueurs(int nbJoueurs) {
+        this.nbJoueurs = nbJoueurs;
+    }
 
+    public void setListeJoueurs(ArrayList<Joueur> listeJoueurs) {
+        this.listeJoueurs = listeJoueurs;
+    }
 
     public int getNbFantomeRouge() {
         return nbFantomeRouge;

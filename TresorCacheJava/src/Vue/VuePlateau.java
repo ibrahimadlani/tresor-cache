@@ -6,6 +6,7 @@ import Modele.Couloir;
 import Modele.Joueur;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class VuePlateau {
 
@@ -77,5 +78,48 @@ public class VuePlateau {
 
     public void erreurTresor(String s){
         System.out.println(s);
+    }
+
+    public int initNbJoueur(){
+        System.out.println("Entrez le nombre de joueurs (2 - 4):");
+        Scanner sc1 = new Scanner(System.in);
+        int nbJoueur = sc1.nextInt();
+        while (nbJoueur > 4 || nbJoueur < 2) {
+            System.out.println("Entrez le nombre de joueurs (2 - 4):");
+            nbJoueur = sc1.nextInt();
+        }
+        return nbJoueur;
+    }
+
+    public ArrayList<Joueur> initJoueurs(int nbJoueurs){
+        ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>();
+        Scanner sc2 = new Scanner(System.in);
+        for (int i = 0; i < nbJoueurs; i++) {
+            System.out.println("Entrez le nom du joueur #"+i+".");
+            String nom = sc2.nextLine();
+            Joueur j = new Joueur(nom);
+            listeJoueurs.add(j);
+        }
+        return listeJoueurs;
+    }
+
+    public void affichageTourJoueur(String j){
+        System.out.println("/!\\ Tour :"+j+"/!\\ ");
+    }
+
+    public void affichageNom(String j){
+        System.out.println("\n["+j+"] : Appuyer sur ENTRER pour lancer le dé");
+    }
+
+    public void affichageMouvementRestant(int j, int mouvements){
+        System.out.println("\n[ "+j+" ] : Quel mouvemement voulez-vous faire ? ("+mouvements+" restant(s)...)");
+    }
+
+    public void rolling(int x){
+        System.out.println("\uD83C\uDFB2 : rolling...\n\uD83C\uDFB2 : "+x);
+    }
+
+    public void affichagePauseThematique(){
+        System.out.println("-------------------------------------------------------------------------");
     }
 }
