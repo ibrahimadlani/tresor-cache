@@ -368,7 +368,7 @@ public class ControleurPlateau {
 
                         if ((p.getMatrice().get(j.getY()).get(j.getX())).getJoueurs().size() >= 2){
                             vue.erreurTresor("Combat fantome rouge");
-                            this.combatRouge(j,j,((Salle) p.getMatrice().get(j.getY()).get(j.getX())));
+                            this.combatRouge(j,((Salle) p.getMatrice().get(j.getY()).get(j.getX())));
                         }else {
                             vue.erreurTresor("HELP ! Vous ne pouvez pas combatre le fantome seule");
                         }
@@ -397,40 +397,43 @@ public class ControleurPlateau {
 
     public void combatVert(Joueur j, Salle s){
         Scanner sc = new Scanner(System.in);
+        vue.combartVert(j.getNom());
         String enter = sc.nextLine();
         while (enter == null) {
-            System.out.println("\n["+j.getNom()+"] : Appuyer sur ENTRER pour combatre le fantome vert");
+            vue.combartVert(j.getNom());
             enter = sc.nextLine();
         }
         if (!s.isFantomeRouge() && s.getListeFantomes().size() > 0){
             if (p.getDeCombat1().roll() == 1){
-                //SupprimerFantomeVert
+                s.deleteFantome();
             }else {
                 System.out.println("Defaite Combat");
             }
         }
     }
 
-    public void combatRouge(Joueur j1,Joueur j2, Salle s) {
+    public void combatRouge(Joueur j1, Salle s) {
         Scanner sc = new Scanner(System.in);
+        vue.combartRouge(j1.getNom());
         String enter = sc.nextLine();
         while (enter == null) {
-            System.out.println("\n[" + j1.getNom() + "] : Appuyer sur ENTRER pour combatre le fantome vert");
+            vue.combartRouge(j1.getNom());
             enter = sc.nextLine();
         }
         if (s.isFantomeRouge() && s.getListeFantomes().size() > 0) {
             if (p.getDeCombat1().roll() == 2) {
-                //SupprimerFantomeRouge
+                s.deleteFantome();
             } else {
                 Scanner sc2 = new Scanner(System.in);
-                String enter2 = sc.nextLine();
+                vue.combartRouge(j1.getNom());
+                String enter2 = sc2.nextLine();
                 while (enter2 == null) {
-                    System.out.println("\n[" + j2.getNom() + "] : Appuyer sur ENTRER pour combatre le fantome vert");
+                    vue.combartRouge(j1.getNom());
                     enter = sc.nextLine();
                 }
                 if (s.isFantomeRouge() && s.getListeFantomes().size() > 0) {
                     if (p.getDeCombat1().roll() == 2) {
-                        //SupprimerFantomeRouge
+                        s.deleteFantome();
                     } else {
                         System.out.println("Defaite Combat");
                     }
@@ -438,6 +441,20 @@ public class ControleurPlateau {
             }
         }
     }
+
+    public void combat(Joueur j1){
+        Salle s = ((Salle) p.getMatrice().get(j1.getY()).get(j1.getX()));
+        if (s.isFantomeRouge()){
+            if (s.getJoueurs().size() >= 2){
+                vue.combartRouge(j1.getNom());
+                combatRouge(j1,s);
+            }
+        }else if (s.getListeFantomes().size() > 0){
+            vue.combartVert(j1.getNom());
+            combatVert(j1,s);
+        }
+    }
+
 
     public void affichageTourJoueur(int j){
         vue.affichageTourJoueur(p.listeJoueurs().get(j).getNom());
@@ -454,15 +471,6 @@ public class ControleurPlateau {
     public void affichagePauseThematique(){
         vue.affichagePauseThematique();
     }
-
-    /*public void combat(Joueur j1){
-        Salle s = ((Salle) p.getMatrice().get(j1.getY()).get(j1.getX()));
-        if (s.isFantomeRouge()){
-            if (.isFantomeRouge()){
-
-            }
-        }
-    }*/
 
     public void erreurEntree(){
         vue.erreurEntree();

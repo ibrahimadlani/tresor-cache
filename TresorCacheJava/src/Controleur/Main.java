@@ -69,7 +69,8 @@ public class Main {
                         break;
                     }
                     else if(mouv == 0){
-                        //cp.combat(cp.getP().listeJoueurs().get(j));
+                        cp.combat(cp.getP().listeJoueurs().get(j));
+                        cp.afficher();
                         break;
                     }else{
                         cp.erreurEntree();

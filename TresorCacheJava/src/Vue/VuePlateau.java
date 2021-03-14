@@ -122,4 +122,12 @@ public class VuePlateau {
     public void affichagePauseThematique(){
         System.out.println("-------------------------------------------------------------------------");
     }
+
+    public void combartVert(String j){
+        System.out.println("\n[ "+j+" ] : Appuyer sur ENTRER pour combatre le fantome vert");
+    }
+
+    public void combartRouge(String j){
+        System.out.println("\n[ "+j+" ] : Appuyer sur ENTRER pour combatre le fantome rouge");
+    }
 }
