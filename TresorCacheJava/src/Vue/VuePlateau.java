@@ -1,14 +1,190 @@
 package Vue;
 
-import Modele.Case;
-import Modele.Salle;
-import Modele.Couloir;
-import Modele.Joueur;
+import Modele.*;
 
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VuePlateau {
+
+    private JFrame frame = new JFrame("Trésor Caché");
+    private JPanel entryPanel = new JPanel(new GridBagLayout());
+    private JPanel setupPanel1 = new JPanel();
+    private JPanel setupPanel2 = new JPanel();
+    private JPanel gamePanel = new JPanel();
+    private JPanel nextGamePanel = new JPanel();
+
+    public void initEntryPanel(Plateau p){
+
+
+        this.entryPanel.setBackground(Color.white);
+        JButton button = new JButton();
+        button.setPreferredSize(new Dimension(200, 80));
+        button.setText("Nouvelle Partie");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setupPanel1(p);
+            }
+        });
+
+        this.entryPanel.add(button);
+        this.frame.add(entryPanel, BorderLayout.CENTER);
+
+        this.frame.setSize(854, 480);
+        this.frame.setLocationRelativeTo(null);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setVisible(true);
+
+    }
+    public void setupPanel1(Plateau p){
+        this.setupPanel1.setBackground(Color.white);
+        this.setupPanel1.setLayout(new FlowLayout());
+
+        JLabel label1 = new JLabel();
+        label1.setText("Selectionnez le nombre de joueurs");
+
+        JButton button1 = new JButton();
+        button1.setPreferredSize(new Dimension(150, 40));
+        button1.setText("Trois joueurs");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                initNbJoueur(3);
+                setupPanel2(p);
+            }
+        });
+
+
+        JButton button2 = new JButton();
+        button2.setPreferredSize(new Dimension(150, 40));
+        button2.setText("Quatre joueurs");
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                initNbJoueur(4);
+                setupPanel2(p);
+            }
+        });
+
+        this.setupPanel1.add(label1);
+        this.setupPanel1.add(button1);
+        this.setupPanel1.add(button2);
+
+        this.frame.setContentPane(setupPanel1);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+    public void setupPanel2(Plateau p){
+        System.out.println(p.getNbJoueurs());
+        this.setupPanel2.setBackground(Color.white);
+        this.setupPanel2.setLayout(new FlowLayout());
+
+        for (int i = 0; i < p.getNbJoueurs(); i++) {
+            JLabel label2 = new JLabel();
+            label2.setText("Joueur #"+i);
+            JTextField tfield1 = new JTextField(8);
+            this.setupPanel2.add(label2);
+            this.setupPanel2.add(tfield1);
+
+
+        }
+
+        JButton button1 = new JButton();
+        button1.setPreferredSize(new Dimension(200, 80));
+        button1.setText("Lancer la partie");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                gamePanel(p.getMatrice());
+            }
+        });
+
+
+        this.setupPanel2.add(button1);
+
+        this.frame.setContentPane(setupPanel2);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+    public static JPanel getMap(ArrayList<ArrayList<Case>> plateau){
+
+        JPanel global = new JPanel();global.setLayout(new BoxLayout(global,BoxLayout.Y_AXIS));
+        global.setBackground(new Color(207,193,175));
+        JPanel ligne;
+        JPanel caseGraphique;
+        File fichier;
+
+
+        ImageIcon bg= new ImageIcon("TresorCacheJava/Images/salle.png");
+        JLabel bgl =new JLabel(bg);
+        global.add(bgl);
+
+        for(int i=0 ; i<plateau.size() ; i++){
+            ligne = new JPanel();
+            for(int j=0 ; j<plateau.get(0).size(); j++){
+                caseGraphique = new JPanel();
+
+
+                ImageIcon imageCouloir = new ImageIcon("TresorCacheJava/Images/couloir.png");
+
+                ImageIcon imageVoid= new ImageIcon("TresorCacheJava/Images/void.png");
+
+
+
+                caseGraphique.setLayout(new BoxLayout(caseGraphique,BoxLayout.X_AXIS));
+                ligne.add(caseGraphique,BorderLayout.CENTER);
+                ligne.setLayout(new BoxLayout(ligne,BoxLayout.X_AXIS));
+            }
+            global.add(ligne);//ajouter le panel ligne au tout
+        }
+        return global;
+    }
+    public void gamePanel(ArrayList<ArrayList<Case>> plateau){
+
+        JPanel southBorderLayoutPanel;
+        JPanel centerGridBagLayoutPanel;
+        JPanel eastGridLayoutPanel;
+        JButton southButton = new JButton("South Button");
+        JButton centerButton = new JButton("Center Button");
+        JButton eastButton = new JButton("East cvyxvyxcvyxcvcvyv");
+        JButton eastButton2 = new JButton("East cvyxvyxcvyxcvcvyv");
+        southBorderLayoutPanel = new JPanel(new BorderLayout());
+        centerGridBagLayoutPanel = new JPanel(new GridBagLayout());
+        eastGridLayoutPanel = new JPanel(new GridLayout(2, 1));
+        southBorderLayoutPanel.add(southButton);
+        southBorderLayoutPanel.setBorder(BorderFactory.createTitledBorder("Joueurs"));
+        centerGridBagLayoutPanel.add(getMap(plateau));
+        centerGridBagLayoutPanel.setBorder(BorderFactory.createTitledBorder("Plateau"));
+        eastGridLayoutPanel.add(eastButton);
+        eastGridLayoutPanel.add(eastButton2);
+        eastGridLayoutPanel.setBorder(BorderFactory.createTitledBorder("Information"));
+        int height = eastGridLayoutPanel.getHeight();
+        eastGridLayoutPanel.setSize(new Dimension(300,height));
+        this.gamePanel.setLayout(new BorderLayout());      // This is the deafault layout
+        this.gamePanel.add(southBorderLayoutPanel, BorderLayout.PAGE_END);
+        this.gamePanel.add(centerGridBagLayoutPanel, BorderLayout.CENTER);
+        this.gamePanel.add(eastGridLayoutPanel, BorderLayout.LINE_END);
+        this.gamePanel.setVisible(true);
+        this.frame.pack();
+        this.frame.setSize(1280, 720);
+        this.frame.setLocationRelativeTo(null);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setContentPane(gamePanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+
+    }
+
+
 
     public void affichage(ArrayList<ArrayList<Case>> plateau,ArrayList<Joueur> listeJoueur,int nbtresor){
         String affiche = "+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+";
@@ -80,15 +256,8 @@ public class VuePlateau {
         System.out.println(s);
     }
 
-    public int initNbJoueur(){
-        System.out.println("Entrez le nombre de joueurs (2 - 4):");
-        Scanner sc1 = new Scanner(System.in);
-        int nbJoueur = sc1.nextInt();
-        while (nbJoueur > 4 || nbJoueur < 2) {
-            System.out.println("Entrez le nombre de joueurs (2 - 4):");
-            nbJoueur = sc1.nextInt();
-        }
-        return nbJoueur;
+    public int initNbJoueur(int j){
+        return j;
     }
 
     public ArrayList<Joueur> initJoueurs(int nbJoueurs){

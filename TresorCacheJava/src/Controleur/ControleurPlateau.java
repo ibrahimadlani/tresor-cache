@@ -23,12 +23,21 @@ public class ControleurPlateau {
     }
     public Plateau getP() { return p; }
 
-    public void initNbJoueur(){
-        int nbJoueur = vue.initNbJoueur();
+    public void initNbJoueur(int j){
+        int nbJoueur = vue.initNbJoueur(j);
         p.setNbJoueurs(nbJoueur);
     }
 
     public void initJoueurs(){
+        ArrayList<Joueur> listeJoueurs = vue.initJoueurs(p.getNbJoueurs());
+        p.setListeJoueurs(listeJoueurs);
+        for (Joueur j:
+                listeJoueurs ) {
+            p.getMatrice().get(10).get(6).ajouterJoueur(j);
+        }
+    }
+
+    public void initJoueurs2(){
         ArrayList<Joueur> listeJoueurs = vue.initJoueurs(p.getNbJoueurs());
         p.setListeJoueurs(listeJoueurs);
         for (Joueur j:
@@ -356,7 +365,6 @@ public class ControleurPlateau {
         }
         return true;
     }
-
     public void prendreTresor(Joueur j){
         if (p.getMatrice().get(j.getY()).get(j.getX()) instanceof Salle){
             if (((Salle) p.getMatrice().get(j.getY()).get(j.getX())).isTresor()){
@@ -389,12 +397,10 @@ public class ControleurPlateau {
             j.setTresor(false);
         }
     }
-
     public void tirerCarte(){
         String messageRetour = p.tirerCarte();
         vue.tirageDeCarte(messageRetour);
     }
-
     public void combatVert(Joueur j, Salle s){
         Scanner sc = new Scanner(System.in);
         vue.combartVert(j.getNom());
@@ -411,7 +417,6 @@ public class ControleurPlateau {
             }
         }
     }
-
     public void combatRouge(Joueur j1, Salle s) {
         Scanner sc = new Scanner(System.in);
         vue.combartRouge(j1.getNom());
@@ -441,7 +446,6 @@ public class ControleurPlateau {
             }
         }
     }
-
     public void combat(Joueur j1){
         Salle s = ((Salle) p.getMatrice().get(j1.getY()).get(j1.getX()));
         if (s.isFantomeRouge()){
@@ -454,29 +458,35 @@ public class ControleurPlateau {
             combatVert(j1,s);
         }
     }
-
-
     public void affichageTourJoueur(int j){
         vue.affichageTourJoueur(p.listeJoueurs().get(j).getNom());
     }
-
     public void affichageNom(int j){
         vue.affichageNom(p.listeJoueurs().get(j).getNom());
     }
-
     public void affichageMouvementRestant(int j, int mouvements){
         vue.affichageMouvementRestant(j, mouvements);
     }
-
     public void affichagePauseThematique(){
         vue.affichagePauseThematique();
     }
-
     public void erreurEntree(){
         vue.erreurEntree();
     }
-
     public void afficher(){
         vue.affichage(p.getMatrice(),p.listeJoueurs(),p.getNbTresor());
     }
+    public void initEntryPanel(){
+        vue.initEntryPanel(p);
+    }
+    public void setupPanel1(){
+        vue.setupPanel1(p);
+    }
+    public void setupPanel2(){
+        vue.setupPanel2(p);
+    }
+    public void gamePanel(){
+        vue.gamePanel(p.getMatrice());
+    }
 }
+

@@ -6,10 +6,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ControleurPlateau cp = new ControleurPlateau();
+        cp.initEntryPanel();
 
-        cp.initNbJoueur(); //initialisation du nombre de joueurs
-        cp.initJoueurs(); //initialisation des noms et de la positions des joueurs
-
+/*
         Scanner sc = new Scanner(System.in);
         while (cp.getP().getNbTresor() < 6 || cp.getP().getNbFantomeRouge() < 6) {
             cp.affichagePauseThematique();
@@ -77,7 +76,7 @@ public class Main {
                     }
                 }
             }
-        }
+        }*/
     }
 }
 /*
