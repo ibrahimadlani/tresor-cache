@@ -19,13 +19,16 @@ public class ControleurPlateau {
 
     public ControleurPlateau() {
         this.p = new Plateau();
-        this.vue = new VuePlateau();
+        this.vue = new VuePlateau(this);
     }
     public Plateau getP() { return p; }
 
     public void initNbJoueur(int j){
-        int nbJoueur = vue.initNbJoueur(j);
-        p.setNbJoueurs(nbJoueur);
+        vue.setupPanel2(p, j);
+    }
+
+    public void setupNbJoueurs(){
+        vue.setupPanel1(p);
     }
 
     public void initJoueurs(){
@@ -479,14 +482,12 @@ public class ControleurPlateau {
     public void initEntryPanel(){
         vue.initEntryPanel(p);
     }
-    public void setupPanel1(){
-        vue.setupPanel1(p);
-    }
-    public void setupPanel2(){
-        vue.setupPanel2(p);
-    }
-    public void gamePanel(){
-        vue.gamePanel(p.getMatrice());
+    public void gamePanel(ArrayList<String> listeNoms){
+
+        for (int i = 0; i < listeNoms.size(); i++) {
+            p.getListeJoueurs().add(new Joueur(listeNoms.get(i)));
+        }
+        vue.gamePanel(p);
     }
 }
 

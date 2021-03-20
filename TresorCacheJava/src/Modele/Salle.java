@@ -53,7 +53,6 @@ public class Salle extends Case{
             this.listeFantomes.add(new FantomeRouge(this));
             this.fantomeRouge = true;
         }else {
-            System.out.println("Impossible d'ajouter un fantome a un fantome rouge");
         }
     }
 
@@ -68,7 +67,6 @@ public class Salle extends Case{
             this.listeFantomes.clear();
             this.fantomeRouge = false;
         } {
-            System.out.println("Impossible d'ajouter un fantome a un fantome rouge");
         }
     }
 

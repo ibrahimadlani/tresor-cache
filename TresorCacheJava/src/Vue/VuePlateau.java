@@ -1,5 +1,6 @@
 package Vue;
 
+import Controleur.ControleurPlateau;
 import Modele.*;
 
 import java.awt.*;
@@ -13,12 +14,17 @@ import java.util.Scanner;
 
 public class VuePlateau {
 
+    private ControleurPlateau cp;
     private JFrame frame = new JFrame("Trésor Caché");
     private JPanel entryPanel = new JPanel(new GridBagLayout());
     private JPanel setupPanel1 = new JPanel();
     private JPanel setupPanel2 = new JPanel();
     private JPanel gamePanel = new JPanel();
     private JPanel nextGamePanel = new JPanel();
+
+    public VuePlateau(ControleurPlateau cp) {
+        this.cp = cp;
+    }
 
     public void initEntryPanel(Plateau p){
 
@@ -30,7 +36,7 @@ public class VuePlateau {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setupPanel1(p);
+                cp.setupNbJoueurs();
             }
         });
 
@@ -56,8 +62,7 @@ public class VuePlateau {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                initNbJoueur(3);
-                setupPanel2(p);
+                cp.initNbJoueur(3);
             }
         });
 
@@ -69,8 +74,7 @@ public class VuePlateau {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                initNbJoueur(4);
-                setupPanel2(p);
+                cp.initNbJoueur(4);
             }
         });
 
@@ -82,32 +86,47 @@ public class VuePlateau {
         this.frame.revalidate();
         this.frame.repaint();
     }
-    public void setupPanel2(Plateau p){
-        System.out.println(p.getNbJoueurs());
+
+    public void setupPanel2(Plateau p, int nbJ){
         this.setupPanel2.setBackground(Color.white);
         this.setupPanel2.setLayout(new FlowLayout());
+        ArrayList<String> listeNoms = new ArrayList<>();
+        ArrayList<JTextField> listeField = new ArrayList<>();
 
-        for (int i = 0; i < p.getNbJoueurs(); i++) {
+        for (int i = 0; i < nbJ; i++) {
             JLabel label2 = new JLabel();
             label2.setText("Joueur #"+i);
             JTextField tfield1 = new JTextField(8);
             this.setupPanel2.add(label2);
             this.setupPanel2.add(tfield1);
-
-
+            listeField.add(tfield1);
         }
-
         JButton button1 = new JButton();
         button1.setPreferredSize(new Dimension(200, 80));
         button1.setText("Lancer la partie");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                gamePanel(p.getMatrice());
+                for (int i = 0; i < listeField.size(); i++) {
+                    listeNoms.add(listeField.get(i).getText());
+                }
+                boolean valide = true;
+                for (int i = 0; i < listeNoms.size(); i++) {
+                    if(listeNoms.get(i).length() == 0){
+                        valide = false;
+                        System.out.println(listeNoms);
+                    }
+                }
+                if(valide) {
+                    cp.gamePanel(listeNoms);
+                }else{
+                    listeNoms.clear();
+                    listeField.clear();
+                    JLabel jl = new JLabel("erreur");
+                    setupPanel2.add(jl);
+                }
             }
         });
-
 
         this.setupPanel2.add(button1);
 
@@ -148,24 +167,38 @@ public class VuePlateau {
         }
         return global;
     }
-    public void gamePanel(ArrayList<ArrayList<Case>> plateau){
+    public void gamePanel(Plateau plateau){
 
         JPanel southBorderLayoutPanel;
         JPanel centerGridBagLayoutPanel;
         JPanel eastGridLayoutPanel;
         JButton southButton = new JButton("South Button");
         JButton centerButton = new JButton("Center Button");
-        JButton eastButton = new JButton("East cvyxvyxcvyxcvcvyv");
-        JButton eastButton2 = new JButton("East cvyxvyxcvyxcvcvyv");
+        ArrayList<JLabel> listeJoueur = new ArrayList<>();
+        for (int i = 0; i < plateau.getListeJoueurs().size(); i++) {
+            String affiche = "";
+            affiche += "" + plateau.getListeJoueurs().get(i).getNom()+"\t("+plateau.getListeJoueurs().get(i).getX()+";"+plateau.getListeJoueurs().get(i).getY()+")";
+            if (plateau.getListeJoueurs().get(i).isTresor()){
+                affiche += "\t[*]";
+            }else {
+                affiche += "\t[ ]";
+            }
+            listeJoueur.add(new JLabel(affiche));
+        }
+        for (int i = 0; i < plateau.getListeJoueurs().size(); i++) {
+            JLabel label2 = new JLabel();
+            label2.setText("Joueur #"+plateau.getListeJoueurs().get(i));
+        }
         southBorderLayoutPanel = new JPanel(new BorderLayout());
         centerGridBagLayoutPanel = new JPanel(new GridBagLayout());
-        eastGridLayoutPanel = new JPanel(new GridLayout(2, 1));
+        eastGridLayoutPanel = new JPanel(new GridLayout(plateau.getListeJoueurs().size(), 1));
         southBorderLayoutPanel.add(southButton);
         southBorderLayoutPanel.setBorder(BorderFactory.createTitledBorder("Joueurs"));
-        centerGridBagLayoutPanel.add(getMap(plateau));
+        centerGridBagLayoutPanel.add(getMap(plateau.getMatrice()));
         centerGridBagLayoutPanel.setBorder(BorderFactory.createTitledBorder("Plateau"));
-        eastGridLayoutPanel.add(eastButton);
-        eastGridLayoutPanel.add(eastButton2);
+        for (int i = 0; i < listeJoueur.size(); i++) {
+            eastGridLayoutPanel.add(listeJoueur.get(i));
+        }
         eastGridLayoutPanel.setBorder(BorderFactory.createTitledBorder("Information"));
         int height = eastGridLayoutPanel.getHeight();
         eastGridLayoutPanel.setSize(new Dimension(300,height));
@@ -183,8 +216,6 @@ public class VuePlateau {
         this.frame.repaint();
 
     }
-
-
 
     public void affichage(ArrayList<ArrayList<Case>> plateau,ArrayList<Joueur> listeJoueur,int nbtresor){
         String affiche = "+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+";

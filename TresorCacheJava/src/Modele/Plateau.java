@@ -17,7 +17,12 @@ public class Plateau {
     private Paquet paquet1;
     private Paquet paquet2;
 
+    public ArrayList<Joueur> getListeJoueurs() {
+        return listeJoueurs;
+    }
+
     public Plateau() {
+        listeJoueurs = new ArrayList<>();
         Scanner sc1 = new Scanner(System.in);
         for(int i = 0; i < 11; i++) {
             ArrayList<Case> ligne = new ArrayList();
