@@ -147,7 +147,7 @@ public class VuePlateau {
         JLabel bgl =new JLabel(bg);
         global.add(bgl);
 
-        for(int i=0 ; i<plateau.size() ; i++){
+        /*for(int i=0 ; i<plateau.size() ; i++){
             ligne = new JPanel();
             for(int j=0 ; j<plateau.get(0).size(); j++){
                 caseGraphique = new JPanel();
@@ -164,16 +164,24 @@ public class VuePlateau {
                 ligne.setLayout(new BoxLayout(ligne,BoxLayout.X_AXIS));
             }
             global.add(ligne);//ajouter le panel ligne au tout
-        }
+        }*/
         return global;
+    }
+    public void updateInfo(Plateau p){
+        gamePanel.removeAll();
+        gamePanel.revalidate();
+        gamePanel.repaint();//refresh la page
+
+        gamePanel(p);
     }
     public void gamePanel(Plateau plateau){
 
         JPanel southBorderLayoutPanel;
-        JPanel centerGridBagLayoutPanel;
+
         JPanel eastGridLayoutPanel;
-        JButton southButton = new JButton("South Button");
-        JButton centerButton = new JButton("Center Button");
+        JPanel centerGridBagLayoutPanel;
+
+
         ArrayList<JLabel> listeJoueur = new ArrayList<>();
         for (int i = 0; i < plateau.getListeJoueurs().size(); i++) {
             String affiche = "";
@@ -189,17 +197,159 @@ public class VuePlateau {
             JLabel label2 = new JLabel();
             label2.setText("Joueur #"+plateau.getListeJoueurs().get(i));
         }
+        JButton up = new JButton("Up");
+        JButton down = new JButton("Down");
+        JButton left = new JButton("Left");
+        JButton right = new JButton("Right");
+        JPanel center = new JPanel(new GridLayout(1, 4));
+        JButton skip = new JButton("Skip");
+        JButton fight = new JButton("Fight");
+        JButton take = new JButton("Take");
+        JButton drop = new JButton("Drop");
         southBorderLayoutPanel = new JPanel(new BorderLayout());
+        southBorderLayoutPanel.add(down, BorderLayout.PAGE_END);
+        southBorderLayoutPanel.add(up, BorderLayout.PAGE_START);
+        southBorderLayoutPanel.add(left, BorderLayout.LINE_START);
+        southBorderLayoutPanel.add(right, BorderLayout.LINE_END);
+
+
+        center.add(skip);
+        center.add(fight);
+        center.add(take);
+        center.add(drop);
+        southBorderLayoutPanel.add(center, BorderLayout.CENTER);
         centerGridBagLayoutPanel = new JPanel(new GridBagLayout());
         eastGridLayoutPanel = new JPanel(new GridLayout(plateau.getListeJoueurs().size(), 1));
-        southBorderLayoutPanel.add(southButton);
         southBorderLayoutPanel.setBorder(BorderFactory.createTitledBorder("Joueurs"));
         centerGridBagLayoutPanel.add(getMap(plateau.getMatrice()));
         centerGridBagLayoutPanel.setBorder(BorderFactory.createTitledBorder("Plateau"));
+/*
+        while (cp.getP().getNbTresor() < 6 || cp.getP().getNbFantomeRouge() < 6) {
+            cp.affichagePauseThematique();
+            for (int j = 0; j < cp.getP().listeJoueurs().size() ; j++) {
+
+
+                int x = cp.rolling();
+                int k = 0;
+                while(k<x){
+                    cp.affichageMouvementRestant(j, x-k);
+
+
+
+                    boolean mouvementEffectue;
+                    if (mouv == 8){
+                        if(cp.monterJoueur(cp.getP().listeJoueurs().get(j))){
+                            k++;
+                        }
+                        cp.afficher();
+                    }else if (mouv == 2){
+                        if(cp.descendreJoueur(cp.getP().listeJoueurs().get(j))){
+                            k++;
+                        }
+                        cp.afficher();
+                    }else if(mouv == 4){
+                        if(cp.gaucheJoueur(cp.getP().listeJoueurs().get(j))) {
+                            k++;
+                        }
+                        cp.afficher();
+                    }else if(mouv == 6){
+                        if(cp.droiteJoueur(cp.getP().listeJoueurs().get(j))){
+                            k++;
+                        }
+                        cp.afficher();
+                    }else if(mouv == 1){
+                        cp.prendreTresor(cp.getP().listeJoueurs().get(j));
+                        cp.afficher();
+                        break;
+                    }
+                    else if(mouv == 3){
+                        cp.depotTresor(cp.getP().listeJoueurs().get(j));
+                        cp.afficher();
+                        k++;
+                    }
+                    else if(mouv == 5){
+                        cp.afficher();
+                        break;
+                    }
+                    else if(mouv == 0){
+                        cp.combat(cp.getP().listeJoueurs().get(j));
+                        cp.afficher();
+                        break;
+                    }else{
+                        cp.erreurEntree();
+                    }
+                }
+            }
+        }*/
         for (int i = 0; i < listeJoueur.size(); i++) {
             eastGridLayoutPanel.add(listeJoueur.get(i));
         }
         eastGridLayoutPanel.setBorder(BorderFactory.createTitledBorder("Information"));
+        up.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.monterJoueur(plateau.getListeJoueurs().get(0));
+
+                updateInfo(plateau);
+
+            }
+        });
+        down.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.descendreJoueur(plateau.getListeJoueurs().get(0));
+                updateInfo(plateau);
+
+            }
+        });
+        right.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.droiteJoueur(plateau.getListeJoueurs().get(0));
+                updateInfo(plateau);
+
+            }
+        });
+        left.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.gaucheJoueur(plateau.getListeJoueurs().get(0));
+                updateInfo(plateau);
+
+            }
+        });
+        take.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.prendreTresor(plateau.getListeJoueurs().get(0));
+                updateInfo(plateau);
+
+            }
+        });
+        fight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.combat(plateau.getListeJoueurs().get(0));
+                updateInfo(plateau);
+
+            }
+        });
+        fight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.combat(plateau.getListeJoueurs().get(0));
+                updateInfo(plateau);
+
+            }
+        });
+        drop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cp.depotTresor(plateau.getListeJoueurs().get(0));
+                updateInfo(plateau);
+
+            }
+        });
         int height = eastGridLayoutPanel.getHeight();
         eastGridLayoutPanel.setSize(new Dimension(300,height));
         this.gamePanel.setLayout(new BorderLayout());      // This is the deafault layout
